@@ -5,6 +5,7 @@ import animate from "../../../public/Animation.json"
 import Lottie from "lottie-react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
+import { useEffect } from "react";
 
 
 const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
@@ -26,7 +27,7 @@ const SignUp = () => {
         console.log(data);
 
         const imageFile = { image: data.image[0] }
-        console.log(imageFile);
+        // console.log(imageFile);
         const res = await axiosPublic.post(hosting_api, imageFile, {
             headers: {
                 'content-type': "multipart/form-data"
@@ -34,14 +35,36 @@ const SignUp = () => {
         })
 
         if(res.data.success){
+            const dataInfo = {
+                email: data.email,
+                password: data.password,
+                image: res.data.data.display_url
+            }
+
+            console.log(dataInfo);
+
+
+            const response = await axiosPublic.post('/users' ,dataInfo )
+
+            // fetch('http://localhost:5000/users' , {
+            //     method: 'POST',
+            //     headers: {
+            //         "content-type": "application/json"
+            //     },
+            //     body: JSON.stringify(dataInfo)
+                
+                
+            // })
+
+            console.log(response.data);
             // 
-            createUser(data.email,data.password)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            // createUser(data.email,data.password)
+            // .then(res => {
+            //     console.log(res);
+            // })
+            // .catch(err => {
+            //     console.log(err);
+            // })
 
         }
         console.log(res.data);
