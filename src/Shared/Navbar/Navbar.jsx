@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -7,23 +6,27 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { Container } from '@mui/material';
+import { Avatar, Container, Fade,  Menu, MenuItem } from '@mui/material';
 import { Link, NavLink } from 'react-router-dom';
 import "./Navbar.css"
+import useAuth from '../../Hooks/useAuth';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'All Properties', 'Dashboard'];
+// const navItems = ['Home', 'All Properties', 'Dashboard'];
 
 function Navbar(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const { user, Logout } = useAuth()
+
+    console.log(user);
 
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
@@ -42,18 +45,35 @@ function Navbar(props) {
                     <NavLink to='/allProperties' className='navItem'> All Properties </NavLink>
                     <NavLink to='/dashboard' className='navItem'> Dashboard </NavLink>
                 </div>
-                {/* {navItems.map((item) => (
-                    <ListItem key={item} disablePadding>
-                        <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item} />
-                        </ListItemButton>
-                    </ListItem>
-                ))} */}
             </List>
         </Box>
     );
 
     const container = window !== undefined ? () => window().document.body : undefined;
+
+
+    // drop down
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+
+    };
+
+    // logout
+    const handleLogout = () => {
+        Logout()
+            .then(() => {
+
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+        // console.log("hello");
+    }
+
 
     return (
 
@@ -87,20 +107,45 @@ function Navbar(props) {
                                     <NavLink to='/allProperties' className='navItem'> All Properties </NavLink>
                                     <NavLink to='/dashboard' className='navItem'> Dashboard </NavLink>
                                 </div>
-                                {/* {navItems.map((item) => (
-                                <NavLink  key={item}>
-                                    <Button sx={{ color: 'black' }}>
-                                        {item}
-                                    </Button>
-                                </NavLink>
-                            ))} */}
+
                             </Box>
                             <div className='flex justify-end w-full md:w-14'>
-                                <Link to='/login'>  <button className=' border-2 rounded-lg px-3 py-2 hover:text-[#F2561B] border-[#F2561B] mx-8'> Login </button> </Link>
+
+                                {
+                                    user?.email ?
+                                        <div> <Avatar
+                                            onClick={handleClick}
+                                            alt="Remy Sharp"
+                                            src={user?.photoURL}
+                                            sx={{ width: 56, height: 56 }}
+                                        />
+
+                                            <Menu
+                                                id="fade-menu"
+                                                MenuListProps={{
+                                                    'aria-labelledby': 'fade-button',
+                                                }}
+                                                anchorEl={anchorEl}
+                                                open={open}
+                                                onClose={handleClose}
+                                                TransitionComponent={Fade}
+                                            >
+                                                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                                <MenuItem onClick={handleClose}>My account</MenuItem>
+                                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                                            </Menu>
+
+                                            <div>
+
+
+
+                                            </div>
+                                        </div> :
+                                        <Link to='/login'>  <button className=' border-2 rounded-lg px-3 py-2 hover:text-[#F2561B] border-[#F2561B] mx-8'> Login </button> </Link>
+
+                                }
                             </div>
                         </Toolbar>
-
-
 
                     </Container>
                 </AppBar>

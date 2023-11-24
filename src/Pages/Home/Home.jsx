@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import Banner from "./Banner/Banner";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
 
             <Banner></Banner>
             
+            <Toaster />
         </div>
     );
 };

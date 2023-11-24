@@ -1,11 +1,11 @@
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import animate from "../../../public/Animation.json"
 import Lottie from "lottie-react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
-import { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
@@ -14,7 +14,7 @@ const hosting_api = `https://api.imgbb.com/1/upload?key=${api_key}`
 
 const SignUp = () => {
 
-    const {user,createUser} = useAuth()
+    const { createUser, update } = useAuth()
     // console.log(data);
 
     const axiosPublic = useAxiosPublic()
@@ -23,6 +23,10 @@ const SignUp = () => {
         handleSubmit,
         formState: { errors },
     } = useForm()
+
+    const navigate = useNavigate()
+
+
     const onSubmit = async (data) => {
         console.log(data);
 
@@ -34,7 +38,7 @@ const SignUp = () => {
             }
         })
 
-        if(res.data.success){
+        if (res.data.success) {
             const dataInfo = {
                 email: data.email,
                 password: data.password,
@@ -43,32 +47,30 @@ const SignUp = () => {
 
             console.log(dataInfo);
 
+            createUser(data.email, data.password)
+                .then(async (result) => {
+                    console.log(result);
+                    const response = await axiosPublic.post('/users', dataInfo)
+                    console.log(response.data);
+                    if (response.data.insertedId) {
 
-            const response = await axiosPublic.post('/users' ,dataInfo )
-
-            // fetch('http://localhost:5000/users' , {
-            //     method: 'POST',
-            //     headers: {
-            //         "content-type": "application/json"
-            //     },
-            //     body: JSON.stringify(dataInfo)
-                
-                
-            // })
-
-            console.log(response.data);
-            // 
-            // createUser(data.email,data.password)
-            // .then(res => {
-            //     console.log(res);
-            // })
-            // .catch(err => {
-            //     console.log(err);
-            // })
-
+                        update(data.name, res.data.data.display_url)
+                            .then(res => {
+                                console.log(res);
+                                toast.success('Create user Successful!')
+                                navigate('/')
+                            })
+                            .catch(err => {
+                                console.log(err.message);
+                            })
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    toast.error(err.message)
+                })
         }
-        console.log(res.data);
-
+        // console.log(res.data);
     }
 
     return (
@@ -139,7 +141,9 @@ const SignUp = () => {
                         <div className="relative h-11 w-full my-2 min-w-[200px]">
                             <div className="">
                                 <TextField
+                                    focused
                                     id="outlined-required"
+                                    label="Your Profile Picture"
                                     name="image"
                                     type="file"
                                     sx={{ width: '100%', borderRadius: '10px' }}
@@ -168,6 +172,8 @@ const SignUp = () => {
                     </p>
                 </form>
             </div>
+
+            <Toaster />
 
         </div>
     );

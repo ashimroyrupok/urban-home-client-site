@@ -1,12 +1,17 @@
 import { Button, TextField } from "@mui/material";
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleIcon from '@mui/icons-material/Google';
 import animate from "../../../public/Animation.json"
+import useAuth from "../../Hooks/useAuth";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const LoginPage = () => {
+
+    const { signin, googleSignin } = useAuth()
+    const navigate = useNavigate()
 
     const {
         register,
@@ -16,6 +21,28 @@ const LoginPage = () => {
 
     const onSubmit = data => {
         console.log(data);
+        signin(data.email, data.password)
+            .then(res => {
+                console.log(res);
+                navigate('/')
+                toast.success('login successful')
+            })
+            .catch(err => {
+                console.log(err.message);
+                toast.error(err.message)
+            })
+    }
+
+    const handlegoogle = () => {
+        console.log("hello");
+        googleSignin()
+            .then(res => {
+                console.log(res);
+                navigate('/')
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
     }
 
 
@@ -61,13 +88,15 @@ const LoginPage = () => {
                     <div >
                         <h2 className="text-center">New in ? < Link to='/signUp' className="text-[#F2561B]"> Sign Up </Link> </h2>
                     </div>
-                    <div className="w-full flex flex-col ">
-                        <Button sx={{
+                    <div onClick={handlegoogle} className="w-full flex flex-col  ">
+                        <Button  sx={{
                             // borderColor:"#F2561B"
-                        }} variant="outlined"> <GoogleIcon sx={{color:'red'}} ></GoogleIcon> Sign in with Google </Button>
+                        }} variant="outlined"> <GoogleIcon sx={{ color: 'red' }} ></GoogleIcon> Sign in with Google </Button>
 
                     </div>
                 </form>
+
+                <Toaster />
             </div>
 
         </div>
