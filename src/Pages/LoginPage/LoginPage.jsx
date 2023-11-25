@@ -49,6 +49,7 @@ const LoginPage = () => {
                 if (res.user?.email) {
                     const info = {
                         email: res.user?.email,
+                        name:res.user?.displayName,
                         password: "google-login",
                         image: res.user?.photoURL
                     }

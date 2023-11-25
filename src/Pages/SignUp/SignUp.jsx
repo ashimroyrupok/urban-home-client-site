@@ -42,6 +42,7 @@ const SignUp = () => {
             const dataInfo = {
                 email: data.email,
                 password: data.password,
+                name:data.name,
                 image: res.data.data.display_url
             }
 

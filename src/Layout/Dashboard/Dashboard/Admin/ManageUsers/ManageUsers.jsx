@@ -1,9 +1,35 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 
 const ManageUsers = () => {
+    const axiosSecure = useAxiosSecure()
+
+    const { data: users = [],refetch } = useQuery({
+        queryKey: ["users"],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/users')
+            return res.data
+        }
+
+    })
+
+    const handleDeleteUser = email => {
+
+
+
+        axiosSecure.delete(`/users/${email}`)
+        .then(res => {
+            console.log(res.data);
+            refetch()
+        })
+        
+    }
+
+    console.log(users);
     return (
         <div>
 
-            <div className="overflow-x-auto dark:bg-black dark:text-white   h-[60vh] my-10 max-w-5xl mx-auto text-white ">
+            <div className="overflow-x-auto   h-[60vh] my-10 max-w-5xl mx-auto text-white ">
 
                 <div className=" w-full text-black justify-end flex">
 
@@ -13,61 +39,40 @@ const ManageUsers = () => {
                     {/* head */}
                     <thead>
                         <tr>
-                            <th className="text-black dark:text-white  text-xl" >User name</th>
-                            <th className="text-black dark:text-white  text-xl"> User Email </th>
-                            <th className="text-black dark:text-white  text-xl">Make admin button</th>
-                            <th className="text-black dark:text-white  text-xl"> Make Agent button </th>
-                            <th className="text-black dark:text-white  text-xl">  Mark as fraud button </th>
-                            <th className="text-black dark:text-white  text-xl"> Delete </th>
+                            <th className="text-black  text-sm lg:text-xl" >User name</th>
+                            <th className="text-black  text-sm lg:text-xl"> User Email </th>
+                            <th className="text-black  text-sm lg:text-xl">Make admin button</th>
+                            <th className="text-black  text-sm lg:text-xl"> Make Agent button </th>
+                            <th className="text-black  text-sm lg:text-xl">  Mark  Fraud  </th>
+                            <th className="text-black  text-sm lg:text-xl"> Delete </th>
                         </tr>
                     </thead>
 
                     {
-                        // BidData?.map(item => <tbody key={item._id}>
-                        //     <tr className="dark:text-white ">
-                        //         <td>
+                        users?.map(item => <tbody key={item._id}>
+                            <tr className=" ">
+                                <td>
 
-                        //             {item?.jobTitle}
-                        //         </td>
-                        //         <td>
-                        //             {item?.clientEmail}
+                                    {item?.name}
+                                </td>
+                                <td>
+                                    {item?.email}
 
-                        //         </td>
-                        //         <td>  {item?.deadline} </td>
-                        //         <th>
-                        //             {
-                        //                 item?.status === "In progress" || item?.status === "Rejected" ?
-                        //                     <div>
-                        //                         {
-                        //                             item?.status === "In progress" ? <div className="flex flex-col gap-1">
-                        //                                 <ProgressBar
-                        //                                     percent={50}
-                        //                                     filledBackground="linear-gradient(to right, #FF0000, #008000)"
-                        //                                 />
-                        //                                 <button onClick={() => handleComplete(item?._id)} className="px-2 py-1  text-white bg-success mx-auto">Complete</button>
-                        //                             </div> : <span className="font-bold text-error"> Canceled</span>
-                        //                         }
-                        //                     </div>
-                        //                     :
-                        //                     <div>
-                        //                         {
-                        //                             item?.status === "complete" ?
-                        //                                 <div>
-                        //                                     <ProgressBar
-                        //                                         percent={100}
-                        //                                         filledBackground="linear-gradient(to right, #FF0000, #008000)"
-                        //                                     />
-                        //                                 </div>
-
-                        //                                 :
-                        //                                 <button className="btn btn-primary btn-xs">Pending</button>
-                        //                         }
-                        //                     </div>
-
-                        //             }
-                        //         </th>
-                        //     </tr>
-                        // </tbody>)
+                                </td>
+                                <td>
+                                    <button className="btn btn-outline text-green-600">Make Admin</button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-outline text-green-600">Make Agent</button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-outline text-red-600">Fraud</button>
+                                </td>
+                                <td>
+                                    <button onClick={()=> handleDeleteUser(item?.email)} className="btn btn-error"> X </button>
+                                </td>
+                            </tr>
+                        </tbody>)
                     }
 
                 </table>

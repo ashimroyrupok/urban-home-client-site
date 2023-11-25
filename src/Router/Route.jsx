@@ -11,6 +11,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from "../Layout/Dashboard/Dashboard/MyProfile/MyProfile";
 import Wishlist from "../Layout/Dashboard/Dashboard/Wishlist/Wishlist";
 import ManagePropertise from "../Layout/Dashboard/Dashboard/Admin/ManagePropertise/ManagePropertise";
+import ManageUsers from "../Layout/Dashboard/Dashboard/Admin/ManageUsers/ManageUsers";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
             {
                 path: "manageProperties",
                 element:<ManagePropertise></ManagePropertise>
+            },
+            {
+                path:"manageUsers",
+                element: <ManageUsers></ManageUsers>
             }
         ]
     },
