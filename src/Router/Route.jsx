@@ -10,6 +10,7 @@ import Dashboard from "../Layout/Dashboard/Dashboard/Dashboard/Dashboard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from "../Layout/Dashboard/Dashboard/MyProfile/MyProfile";
 import Wishlist from "../Layout/Dashboard/Dashboard/Wishlist/Wishlist";
+import ManagePropertise from "../Layout/Dashboard/Dashboard/Admin/ManagePropertise/ManagePropertise";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
             {
                 path: "wishlist",
                 element: <Wishlist></Wishlist>
+            },
+            // admin
+            {
+                path: "manageProperties",
+                element:<ManagePropertise></ManagePropertise>
             }
         ]
     },
