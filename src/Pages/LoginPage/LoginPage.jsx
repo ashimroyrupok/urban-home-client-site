@@ -6,12 +6,19 @@ import GoogleIcon from '@mui/icons-material/Google';
 import animate from "../../../public/Animation.json"
 import useAuth from "../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+// import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 
 const LoginPage = () => {
 
-    const { signin, googleSignin } = useAuth()
+    const { signin, googleSignin, user } = useAuth()
     const navigate = useNavigate()
+
+    const axiosPublic = useAxiosPublic()
+
+    // const axiosPublic = useAxiosPublic()
 
     const {
         register,
@@ -34,11 +41,28 @@ const LoginPage = () => {
     }
 
     const handlegoogle = () => {
-        console.log("hello");
+        // console.log("hello");
         googleSignin()
-            .then(res => {
+            .then(async (res) => {
                 console.log(res);
-                navigate('/')
+
+                if (res.user?.email) {
+                    const info = {
+                        email: res.user?.email,
+                        password: "google-login",
+                        image: res.user?.photoURL
+                    }
+                    console.log(res.user?.email);
+
+                    axiosPublic.post('/users', info)
+                        .then(res => {
+                            console.log(res.data);
+                            navigate('/')
+                        })
+
+                }
+
+
             })
             .catch(err => {
                 console.log(err.message);
@@ -89,7 +113,7 @@ const LoginPage = () => {
                         <h2 className="text-center">New in ? < Link to='/signUp' className="text-[#F2561B]"> Sign Up </Link> </h2>
                     </div>
                     <div onClick={handlegoogle} className="w-full flex flex-col  ">
-                        <Button  sx={{
+                        <Button sx={{
                             // borderColor:"#F2561B"
                         }} variant="outlined"> <GoogleIcon sx={{ color: 'red' }} ></GoogleIcon> Sign in with Google </Button>
 
