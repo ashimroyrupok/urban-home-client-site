@@ -23,7 +23,7 @@ const Dashboard = () => {
                         <NavLink  to='/dashboard/profile' className="navItem flex gap-1 justify-start  items-center">  <FaHome className="text-black text-xl"></FaHome> Admin Profile </NavLink>
                         <NavLink to='/dashboard/manageProperties' className="navItem flex gap-1 justify-start  items-center">  <GrUserManager className="text-black text-xl"></GrUserManager> Manage Properties</NavLink>
                         <NavLink to='/dashboard/manageUsers' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="text-black text-xl"></FaUsersGear> Manage Users</NavLink>
-                        <NavLink to='/dashboard/myReviews' className=" navItem flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Manage reviews</NavLink>
+                        <NavLink to='/dashboard/manageReviews' className=" navItem flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Manage reviews</NavLink>
                     </div>
                     {/* agent navbar */}
                     {/* <div id="activeList" className="gap-y-4 text-sm" >

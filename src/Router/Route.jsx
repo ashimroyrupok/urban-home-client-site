@@ -12,6 +12,7 @@ import MyProfile from "../Layout/Dashboard/Dashboard/MyProfile/MyProfile";
 import Wishlist from "../Layout/Dashboard/Dashboard/Wishlist/Wishlist";
 import ManagePropertise from "../Layout/Dashboard/Dashboard/Admin/ManagePropertise/ManagePropertise";
 import ManageUsers from "../Layout/Dashboard/Dashboard/Admin/ManageUsers/ManageUsers";
+import ManageReview from "../Layout/Dashboard/Dashboard/Admin/ManageReview/ManageReview";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             {
                 path:"manageUsers",
                 element: <ManageUsers></ManageUsers>
+            },
+            {
+                path:"manageReviews",
+                element: <ManageReview></ManageReview>
             }
         ]
     },
