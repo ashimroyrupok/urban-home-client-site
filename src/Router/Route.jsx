@@ -13,6 +13,10 @@ import Wishlist from "../Layout/Dashboard/Dashboard/Wishlist/Wishlist";
 import ManagePropertise from "../Layout/Dashboard/Dashboard/Admin/ManagePropertise/ManagePropertise";
 import ManageUsers from "../Layout/Dashboard/Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageReview from "../Layout/Dashboard/Dashboard/Admin/ManageReview/ManageReview";
+import AgentAddedProperties from "../Layout/Dashboard/Agent/AgentAddedProperties/AgentAddedProperties";
+import AgentSoldProperties from "../Layout/Dashboard/Agent/AgentSoldProperties/AgentSoldProperties";
+import RequestedProperties from "../Layout/Dashboard/Agent/RequestedProperties/RequestedProperties";
+import AddProperties from "../Layout/Dashboard/Agent/AddProperties/AddProperties";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -54,6 +58,23 @@ const router = createBrowserRouter([
             {
                 path:"manageReviews",
                 element: <ManageReview></ManageReview>
+            },
+            // agent 
+            {
+                path: "addedProperties",
+                element: <AgentAddedProperties></AgentAddedProperties>
+            },
+            {
+                path: "soldProperties",
+                element: <AgentSoldProperties></AgentSoldProperties>
+            },
+            {
+                path : "requestedProperties",
+                element: <RequestedProperties></RequestedProperties>
+            },
+            {
+                path: "addProperties",
+                element: <AddProperties></AddProperties>
             }
         ]
     },

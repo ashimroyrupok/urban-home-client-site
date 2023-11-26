@@ -1,5 +1,6 @@
 import { FaHeart, FaHome } from "react-icons/fa";
 import { MdManageSearch, MdOutlineSell, MdPreview } from "react-icons/md";
+import { IoMdAdd } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
 import "./Dashboard.css"
 import { Divider } from "@mui/material";
@@ -26,15 +27,17 @@ const Dashboard = () => {
                         <NavLink to='/dashboard/manageReviews' className=" navItem flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Manage reviews</NavLink>
                     </div>
                     {/* agent navbar */}
-                    {/* <div id="activeList" className="gap-y-4 text-sm" >
+                    <div id="activeList" className="gap-y-4 text-sm" >
                         <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start   items-center">  <FaHome className="text-black text-xl"></FaHome> Agent Profile </NavLink>
 
-                        <NavLink to='/dashboard/addedProperties' className="navItem my-3 flex gap-1 justify-start  items-center">  <GrUserManager className="text-black text-xl"></GrUserManager> My added properties</NavLink>
+                        <NavLink to='/dashboard/addProperties' className="navItem flex gap-1 justify-start   items-center"> <IoMdAdd className="text-black text-xl"></IoMdAdd> Add Properties </NavLink>
+
+                        <NavLink to='/dashboard/addedProperties' className="navItem my-3 flex gap-1 justify-start  items-center">  <GrUserManager className="text-black text-xl"></GrUserManager> My Added Properties</NavLink>
 
                         <NavLink to='/dashboard/soldProperties' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="text-black text-xl"></FaUsersGear> My Sold Properties</NavLink>
 
                         <NavLink to='/dashboard/requestedProperties' className=" navItem my-3 flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Requested Properties</NavLink>
-                    </div> */}
+                    </div>
 
                     <Divider sx={{ my: 6 }} variant="middle" />
                     <div>

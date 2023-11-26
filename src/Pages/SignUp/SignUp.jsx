@@ -16,8 +16,8 @@ const SignUp = () => {
 
     const { createUser, update } = useAuth()
     // console.log(data);
-
     const axiosPublic = useAxiosPublic()
+
     const {
         register,
         handleSubmit,
@@ -95,7 +95,6 @@ const SignUp = () => {
                         <div className="relative h-11 w-full min-w-[200px]">
                             <div className="">
                                 <TextField
-                                    // required
                                     id="outlined-required"
                                     label="Your Name"
                                     name="name"

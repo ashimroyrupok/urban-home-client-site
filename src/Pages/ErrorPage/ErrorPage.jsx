@@ -11,10 +11,14 @@ const ErrorPage = () => {
                 <Lottie animationData={ErrorAnimation}></Lottie>
             </div>
 
+            <div >
 
-            <Link className="text-4xl flex my-7 items-center justify-center mt-4 " to={'/'}>
-                <button className="px-4 py-2 rounded-sm text-white  bg-[#F2561B] hover:bg-red-600">Go Home</button>
-            </Link>
+
+                <Link to={'/'}  >
+                    <button className="px-4 py-2 rounded-sm text-white  bg-[#F2561B] hover:bg-red-600">Go Home</button>
+                </Link>
+
+            </div>
 
         </div>
     );
