@@ -1,9 +1,9 @@
-import { FaHeart, FaHome, FaIcicles, FaInbox } from "react-icons/fa";
+import { FaHeart, FaHome } from "react-icons/fa";
 import { MdManageSearch, MdOutlineSell, MdPreview } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
 import "./Dashboard.css"
-import { Box, Button, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from "@mui/material";
+import { Button, Divider, SwipeableDrawer } from "@mui/material";
 import { GrUserManager } from "react-icons/gr";
 import { FaUsersGear } from "react-icons/fa6";
 import React from "react";
@@ -89,6 +89,8 @@ const Dashboard = () => {
                         ))}
                     </div>
 
+                    {/* for small device */}
+                    
                     <div className="bg-orange-400 hidden lg:block w-32 pt-10 lg:w-64 text-white min-h-screen  font-semibold">
                         <div className="ml-3 lg:mx-10 mt-10">
                             {/* user navbar */}

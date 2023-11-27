@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import { Avatar, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import { FaArrowRight, FaRegStar } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 const AllProperties = () => {
     const axiosPublic = useAxiosPublic()
@@ -16,12 +17,12 @@ const AllProperties = () => {
     })
     console.log(properties);
     return (
-        <div>
+        <div className="mt-20">
 
             <div>
                 <SectionTitle title={"Featured"}></SectionTitle>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl mx-auto lg:grid-cols-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl pr-4 mx-auto lg:grid-cols-4">
                 {
                     properties.map(item => <Card key={item?._id} sx={{ maxWidth: "380px", pl: "10px", mx: "auto", position: "relative" }}>
                         <CardActionArea>
@@ -33,7 +34,7 @@ const AllProperties = () => {
                             />
                             <CardContent>
                                 <p className="font-semibold my-1">{item?.title}</p>
-                                <p className="flex text-sm text-slate-500"> <span>   <CiLocationOn /> </span>661-699 N Mc Clurg Ct, Chicago, IL 60611, USA</p>
+                                <p className="flex text-sm text-slate-500"> <span>   <CiLocationOn /> </span> {item?.location} </p>
 
 
                                 <div className="flex flex-col justify-between items-center">
@@ -62,7 +63,7 @@ const AllProperties = () => {
                         </CardActionArea>
                         <div className="flex justify-between items-center  w-full ">
                             <p className="text-green-600">  </p>
-                            <button className="py-2 px-4 mr-3 mb-3 flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]">Details <FaArrowRight /></button>
+                            <button className="py-2 px-4 mr-3 mb-3 flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]"> <Link to={`/properties-Details/${item?._id}`}>Details</Link> <FaArrowRight /></button>
                         </div>
                     </Card>)
                 }

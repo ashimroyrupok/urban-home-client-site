@@ -97,7 +97,7 @@ const AddProperties = () => {
                         <TextField
                             focused
                             id="outlined-required"
-                            defaultValue={`${users?.name}`}
+                            value={`${users?.name}`}
                             label="Agent Name"
                             name="agentName"
                             type="text"
@@ -115,7 +115,7 @@ const AddProperties = () => {
                         <TextField
                             focused
                             id="outlined-required"
-                            defaultValue={`${user?.email}`}
+                            value={`${user?.email}`}
                             label="Agent Email"
                             name="agentEmail"
                             type="text"

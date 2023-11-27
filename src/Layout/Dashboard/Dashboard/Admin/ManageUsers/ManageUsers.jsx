@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
 import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
+import SectionTitle from "../../../../../Shared/SectionTitle/SectionTitle";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure()
@@ -14,14 +16,36 @@ const ManageUsers = () => {
 
     })
 
+    // console.log(isLoading, "heyyeyee");
+
     // delete users
     const handleDeleteUser = email => {
-        axiosSecure.delete(`/users/${email}`)
-            .then(res => {
-                console.log(res.data);
-                refetch()
-                toast.success(`${email} deleted successful`)
-            })
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/users/${email}`)
+                    .then(res => {
+                        console.log(res.data);
+                        refetch()
+                        toast.success(`${email} deleted successful`)
+                    })
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+
+
     }
 
     // make admin 
@@ -62,13 +86,11 @@ const ManageUsers = () => {
     return (
         <div>
 
+            <SectionTitle title={"Manage User"}></SectionTitle>
+
             <div className="overflow-x-auto   h-[60vh] my-10 max-w-5xl mx-auto text-white ">
 
-                <div className=" w-full text-black justify-end flex">
-
-                </div>
-
-                <table className="table text-black">
+                <table className="table overflow-x-auto  text-black">
                     {/* head */}
                     <thead>
                         <tr>

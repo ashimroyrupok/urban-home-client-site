@@ -1,16 +1,16 @@
 import { Avatar, Button, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import { CiLocationOn } from "react-icons/ci";
-import { FaArrowRight } from "react-icons/fa";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const AgentAddedProperties = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth()
-    const { data: properties = [],refetch } = useQuery({
+    const { data: properties = [], refetch } = useQuery({
         queryKey: ["properties", user?.email],
         queryFn: async () => {
             const res = await axiosSecure(`/properties/${user?.email}`)
@@ -22,12 +22,29 @@ const AgentAddedProperties = () => {
     const handleDelete = async (data) => {
         console.log(data);
 
-        const res = await axiosSecure.delete(`/properties/${data._id}`)
-        console.log(res.data);
-        if (res.data.deletedCount === 1) {
-            refetch()
-            toast.success(`${data?.title} deleted successful`)
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then( async(result) => {
+            if (result.isConfirmed) {
+
+                const res = await axiosSecure.delete(`/properties/${data._id}`)
+                console.log(res.data);
+                if (res.data.deletedCount === 1) {
+                    refetch()
+                    toast.success(`${data?.title} deleted successful`)
+                }
+
+
+            }
+        });
+
+
     }
 
     // handle update
@@ -41,7 +58,7 @@ const AgentAddedProperties = () => {
 
             <div className="grid grid-cols-1 pr-3 md:grid-cols-2 max-w-7xl gap-5 my-12 mx-auto lg:grid-cols-4">
                 {
-                    properties?.map(item => <Card key={item?._id} sx={{ maxWidth: "380px", mx: "auto", position: "relative",pr:2 }}>
+                    properties?.map(item => <Card key={item?._id} sx={{ maxWidth: "380px", mx: "auto", position: "relative" }}>
                         <CardActionArea>
                             <CardMedia
                                 component="img"
@@ -51,9 +68,9 @@ const AgentAddedProperties = () => {
                             />
                             <CardContent>
                                 <p className="text-[18px]"> {item?.title} </p>
-                                <p className="flex text-sm text-slate-500"> <span>   <CiLocationOn /> </span>661-699 N Mc Clurg Ct, Chicago, IL 60611, USA</p>
+                                <p className="flex text-sm text-slate-500"> <span>   <CiLocationOn /> </span> {item?.location} </p>
 
-                                <p className="text-[#F2561B] font-semibold my-1 text-[16px]"> $ 3454-$5543 </p>
+                                <p className="text-[#F2561B] font-semibold my-1 text-[16px]"> $ {item?.minimumPrice}-${item?.maximumPrice} </p>
 
                                 <div className="flex flex-col justify-between items-center">
                                     <Avatar
@@ -87,9 +104,15 @@ const AgentAddedProperties = () => {
                             <Button onClick={() => handleDelete(item)} variant="outlined" color="error">
                                 Delete
                             </Button>
-                            <button onClick={() => handleUpdate(item)} disabled={item.status === "rejected"} className="py-1 px-4 mr-1 duration-300 disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-[#F2561B] flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]">
-                                <Link to={"addedPropertise/updateProperty"}>Update </Link>
-                                </button>
+
+
+                            {
+                                item.status === "rejected" ? <button className="py-1 px-4 mr-1 duration-300 opacity-30 hover:bg-white hover:text-[#F2561B] flex gap-1 justify-end border  text-[#F2561B] border-[#F2561B]">Update</button> :
+                                    <button onClick={() => handleUpdate(item)} className="py-1 px-4 mr-1 duration-300 disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-[#F2561B] flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]">
+                                        <Link to={`updateProperty/${item?._id}`}>Update </Link>
+                                    </button>
+                            }
+
                         </div>
                     </Card>)
                 }

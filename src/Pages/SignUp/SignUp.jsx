@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 
 const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
-console.log(api_key);
+// console.log(api_key);
 const hosting_api = `https://api.imgbb.com/1/upload?key=${api_key}`
 
 const SignUp = () => {

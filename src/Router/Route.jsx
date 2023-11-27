@@ -18,6 +18,8 @@ import AgentSoldProperties from "../Layout/Dashboard/Agent/AgentSoldProperties/A
 import RequestedProperties from "../Layout/Dashboard/Agent/RequestedProperties/RequestedProperties";
 import AddProperties from "../Layout/Dashboard/Agent/AddProperties/AddProperties";
 import UpdateProperty from "../Layout/Dashboard/Agent/UpdateProperty/UpdateProperty";
+import PrivateRoute from "./PrivateRoute";
+import PropertiesDetails from "../Pages/PropertiesDetails/PropertiesDetails";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -31,6 +33,11 @@ const router = createBrowserRouter([
             {
                 path:"/allProperties",
                 element:<AllProperties></AllProperties>
+            },
+            {
+                path: "/properties-Details/:id",
+                element: <PrivateRoute> <PropertiesDetails></PropertiesDetails> </PrivateRoute>
+
             }
         ]
     },
@@ -67,7 +74,7 @@ const router = createBrowserRouter([
             },
 
             {
-                path:"addedPropertise/updateProperty",
+                path:"addedProperties/updateProperty/:id",
                 element: <UpdateProperty></UpdateProperty>
             },
             {

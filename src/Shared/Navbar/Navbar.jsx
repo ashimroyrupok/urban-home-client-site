@@ -42,7 +42,7 @@ function Navbar(props) {
                 <div id='home' className='flex flex-col gap-4'>
                     <NavLink to='/' className='navItem' > Home </NavLink>
                     <NavLink to='/allProperties' className='navItem'> All Properties </NavLink>
-                    <NavLink to='/dashboard' className='navItem'> Dashboard </NavLink>
+                    <NavLink to='/dashboard/profile' className='navItem'> Dashboard </NavLink>
                 </div>
             </List>
         </Box>
@@ -95,16 +95,16 @@ function Navbar(props) {
                             <Typography
                                 variant="h6"
                                 component="div"
-                                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                                sx={{ flexGrow: 1,fontWeight:800, display: { xs: 'none', sm: 'block' } }}
                             >
-                                MUI
+                                Urban <span className='text-[#F2561B]'>Home</span>
                             </Typography>
                             <Box sx={{ display: { xs: 'none', sm: 'block' }  }}>
 
                                 <div id='home' className='flex gap-4 mr-[80px] lg:mr-[300px]'>
                                     <NavLink to='/' className='navItem' > Home </NavLink>
                                     <NavLink to='/allProperties' className='navItem'> All Properties </NavLink>
-                                    <NavLink to='/dashboard' className='navItem'> Dashboard </NavLink>
+                                    <NavLink to='/dashboard/profile' className='navItem'> Dashboard </NavLink>
                                 </div>
 
                             </Box>
