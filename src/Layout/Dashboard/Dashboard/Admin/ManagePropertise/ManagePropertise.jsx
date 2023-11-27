@@ -1,9 +1,44 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
+import { Spa } from "@mui/icons-material";
 
 const ManagePropertise = () => {
+
+    const axiosSecure = useAxiosSecure()
+
+    const { data: properties = [], refetch } = useQuery({
+        queryKey: ["properties"],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/properties',)
+            return res.data;
+        }
+
+    })
+
+    const handleVerify = async (data) => {
+        console.log(data);
+        const res = await axiosSecure.patch(`/properties/${data._id}`, { status: "verified" })
+        console.log(res.data);
+        if (res.data.modifiedCount > 0) {
+            console.log("hello");
+            refetch()
+        }
+    }
+    const handleRejected = async (data) => {
+        console.log(data);
+        const res = await axiosSecure.patch(`/properties/${data._id}`, { status: "rejected" })
+        console.log(res.data);
+        if (res.data.modifiedCount > 0) {
+            console.log("hello");
+            refetch()
+        }
+    }
+
+    console.log(properties);
     return (
         <div>
 
-            <div className="overflow-x-auto dark:bg-black dark:text-white   h-[60vh] my-10 max-w-5xl mx-auto text-white ">
+            <div className="overflow-x-auto overflow-y-auto dark:bg-black dark:text-white   h-[60vh] my-10 max-w-5xl mx-auto text-white ">
 
                 <div className=" w-full text-black justify-end flex">
 
@@ -13,59 +48,60 @@ const ManagePropertise = () => {
                     {/* head */}
                     <thead>
                         <tr>
-                            <th className="text-black dark:text-white  text-xl" >Job Title</th>
-                            <th className="text-black dark:text-white  text-xl"> Your Email </th>
-                            <th className="text-black dark:text-white  text-xl">Deadline</th>
+                            <th className="text-black dark:text-white  text-xl" >Property Title</th>
+                            <th className="text-black dark:text-white  text-xl">  Property location </th>
+                            <th className="text-black dark:text-white  text-xl">Agent Name</th>
+                            <th className="text-black dark:text-white  text-xl">Agent Email</th>
+                            <th className="text-black dark:text-white  text-xl"> Price Range</th>
                             <th className="text-black dark:text-white  text-xl"> Status </th>
                         </tr>
                     </thead>
 
                     {
-                        // BidData?.map(item => <tbody key={item._id}>
-                        //     <tr className="dark:text-white ">
-                        //         <td>
+                        properties?.map(item => <tbody key={item._id}>
+                            <tr className="dark:text-white ">
+                                <td>
+                                    {item?.title}
+                                </td>
+                                <td>
+                                    {item?.location}
+                                </td>
+                                <td>  {item?.agentName} </td>
+                                <td>  {item?.agentEmail} </td>
+                                <td>  ${item?.minimumPrice}-${item?.maximumPrice} </td>
+                                <th>
+                                    {
+                                        item?.status === "In progress" || item?.status === "Rejected" ?
+                                            <div>
+                                                {
 
-                        //             {item?.jobTitle}
-                        //         </td>
-                        //         <td>
-                        //             {item?.clientEmail}
+                                                }
+                                            </div>
+                                            :
+                                            <div>
+                                                {
+                                                    item?.status === "verified" || item?.status === "rejected" ?
+                                                        <div>
 
-                        //         </td>
-                        //         <td>  {item?.deadline} </td>
-                        //         <th>
-                        //             {
-                        //                 item?.status === "In progress" || item?.status === "Rejected" ?
-                        //                     <div>
-                        //                         {
-                        //                             item?.status === "In progress" ? <div className="flex flex-col gap-1">
-                        //                                 <ProgressBar
-                        //                                     percent={50}
-                        //                                     filledBackground="linear-gradient(to right, #FF0000, #008000)"
-                        //                                 />
-                        //                                 <button onClick={() => handleComplete(item?._id)} className="px-2 py-1  text-white bg-success mx-auto">Complete</button>
-                        //                             </div> : <span className="font-bold text-error"> Canceled</span>
-                        //                         }
-                        //                     </div>
-                        //                     :
-                        //                     <div>
-                        //                         {
-                        //                             item?.status === "complete" ?
-                        //                                 <div>
-                        //                                     <ProgressBar
-                        //                                         percent={100}
-                        //                                         filledBackground="linear-gradient(to right, #FF0000, #008000)"
-                        //                                     />
-                        //                                 </div>
+                                                            {
+                                                                item?.status === "verified" ? <span className="text-green-600"> verified</span>: <span className="text-red-600">Rejected</span>
+                                                            }
 
-                        //                                 :
-                        //                                 <button className="btn btn-primary btn-xs">Pending</button>
-                        //                         }
-                        //                     </div>
+                                                        </div>
+                                                        :
+                                                        <div className="flex justify-center items-center gap-1">
+                                                            <button onClick={() => handleVerify(item)} className="btn btn-sm btn-primary">Verify</button>
+                                                            <button onClick={() => handleRejected(item)} className="btn btn-sm btn-error text-white">Reject</button>
 
-                        //             }
-                        //         </th>
-                        //     </tr>
-                        // </tbody>)
+                                                        </div>
+                                                }
+
+                                            </div>
+
+                                    }
+                                </th>
+                            </tr>
+                        </tbody>)
                     }
 
                 </table>

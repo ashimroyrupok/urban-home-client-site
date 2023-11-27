@@ -5,6 +5,9 @@ import { TextField } from "@mui/material";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
 // console.log(api_key);
@@ -16,7 +19,9 @@ const AddProperties = () => {
 
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure()
-    console.log(axiosSecure);
+
+    const navigate = useNavigate()
+    // console.log(axiosSecure);
     const { data: users = {}, refetch } = useQuery({
         queryKey: ["users", user?.email],
         queryFn: async () => {
@@ -34,16 +39,48 @@ const AddProperties = () => {
     const onSubmit = async (data) => {
         console.log(data);
 
-        const imageFile = { image: data.image[0] }
+        const imageFile = { image: data.propertyImage[0] }
         // console.log(imageFile);
         const res = await axiosPublic.post(hosting_api, imageFile, {
             headers: {
                 'content-type': "multipart/form-data"
             }
         })
+
+        console.log(res.data);
+        if (res.data.success) {
+            const propertyInfo = {
+                agentName: users?.name,
+                agentEmail: users?.email,
+                agentImage: users?.image,
+                title: data?.propertyTitle,
+                description: data?.description,
+                location: data?.location,
+                maximumPrice: data?.maximumPrice,
+                minimumPrice: data?.minimumPrice
+            }
+
+            console.log(propertyInfo);
+
+            const res = await axiosSecure.post('/properties', propertyInfo)
+            console.log(res.data);
+            if (res.data?.insertedId) {
+                navigate('/addedProperties')
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${data?.propertyTitle} added successful`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+
+
+
     }
 
-    console.log(users);
+    // console.log(users);
 
     return (
         <div className="mt-10">
