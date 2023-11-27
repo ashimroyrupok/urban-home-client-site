@@ -1,64 +1,103 @@
 import { Avatar, Button, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import { CiLocationOn } from "react-icons/ci";
 import { FaArrowRight } from "react-icons/fa";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../../../Hooks/useAuth";
+import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const AgentAddedProperties = () => {
+    const axiosSecure = useAxiosSecure();
+    const { user } = useAuth()
+    const { data: properties = [],refetch } = useQuery({
+        queryKey: ["properties", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure(`/properties/${user?.email}`)
+            return res.data
+        }
+    })
+
+    // delete property
+    const handleDelete = async (data) => {
+        console.log(data);
+
+        const res = await axiosSecure.delete(`/properties/${data._id}`)
+        console.log(res.data);
+        if (res.data.deletedCount === 1) {
+            refetch()
+            toast.success(`${data?.title} deleted successful`)
+        }
+    }
+
+    // handle update
+    const handleUpdate = data => {
+        console.log(data);
+    }
+
+    console.log(properties);
     return (
         <div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl gap-5 my-12 mx-auto lg:grid-cols-4">
-                <Card sx={{ maxWidth: "380px", mx: "auto", position: "relative" }}>
-                    <CardActionArea>
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            image="https://i.ibb.co/LhjNsh3/images-q-tbn-ANd9-Gc-Swu-IN5i3-GKx-Iid-XKBye89y-Gp-MY2-Nslx-Mzw-Q-usqp-CAU.jpg"
-                            alt="green iguana"
-                        />
-                        <CardContent>
-                            <p className="text-[18px]">Title is Here</p>
-                            <p className="flex text-sm text-slate-500"> <span>   <CiLocationOn /> </span>661-699 N Mc Clurg Ct, Chicago, IL 60611, USA</p>
+            <div className="grid grid-cols-1 pr-3 md:grid-cols-2 max-w-7xl gap-5 my-12 mx-auto lg:grid-cols-4">
+                {
+                    properties?.map(item => <Card key={item?._id} sx={{ maxWidth: "380px", mx: "auto", position: "relative",pr:2 }}>
+                        <CardActionArea>
+                            <CardMedia
+                                component="img"
+                                height="140"
+                                image={item?.image}
+                                alt="green iguana"
+                            />
+                            <CardContent>
+                                <p className="text-[18px]"> {item?.title} </p>
+                                <p className="flex text-sm text-slate-500"> <span>   <CiLocationOn /> </span>661-699 N Mc Clurg Ct, Chicago, IL 60611, USA</p>
 
-                            <p className="text-[#F2561B] font-semibold my-1 text-[16px]"> $ 3454-$5543 </p>
+                                <p className="text-[#F2561B] font-semibold my-1 text-[16px]"> $ 3454-$5543 </p>
 
-                            <div className="flex flex-col justify-between items-center">
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src="/static/images/avatar/1.jpg"
-                                    sx={{ width: 56, height: 56 }}
-                                />
-                                <span> Agent Name </span>
-                            </div>
+                                <div className="flex flex-col justify-between items-center">
+                                    <Avatar
+                                        alt="Remy Sharp"
+                                        src={item?.agentImage}
+                                        sx={{ width: 56, height: 56 }}
+                                    />
+                                    <span> {item?.agentName} </span>
+                                </div>
 
-                            {/* badge */}
-                            <Typography
-                                sx={{
-                                    fontSize: "18px", position: "absolute", px: "3px", py: "1px",
-                                    backgroundColor: "#F2561B", color: "white", top: "2%", right: "0%"
-                                }}
-                                gutterBottom variant="h6" component="div">
-                                For Sale
-                            </Typography>
-                            <Typography
-                                sx={{
-                                    fontSize: "18px", position: "absolute", px: "3px", py: "1px",
-                                    backgroundColor: "#F2561B", color: "white", top: "2%", left: "0%"
-                                }}
-                                gutterBottom variant="h6" component="div">
-                                {/* <FaRegStar className="text-3xl w-full" /> */}
-                                Pending
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <div className="flex justify-between items-center gap-3 w-full ">
-                        <Button variant="outlined" color="error">
-                            Delete
-                        </Button>
-                        <button className="py-1 px-4 mr-1 duration-300  flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]">Update </button>
-                    </div>
-                </Card>
+                                {/* badge */}
+                                <Typography
+                                    sx={{
+                                        fontSize: "18px", position: "absolute", px: "3px", py: "1px",
+                                        backgroundColor: "#F2561B", color: "white", top: "2%", right: "0%"
+                                    }}
+                                    gutterBottom variant="h6" component="div">
+                                    For Sale
+                                </Typography>
+                                <div className="absolute top-[2%] left-0">
+
+                                    {item?.status ? <div>
+                                        {
+                                            item?.status === "verified" ? <button className="bg-[#F2561B] btn btn-sm text-white"> {item?.status} </button> : <button className="btn btn-sm btn-error text-white"> {item?.status} </button>}
+
+                                    </div> : <span className="btn btn-sm btn-primary">pending </span>}
+                                </div>
+                            </CardContent>
+                        </CardActionArea>
+                        <div className="flex justify-between  items-center py-1 gap-3 w-full ">
+                            <Button onClick={() => handleDelete(item)} variant="outlined" color="error">
+                                Delete
+                            </Button>
+                            <button onClick={() => handleUpdate(item)} disabled={item.status === "rejected"} className="py-1 px-4 mr-1 duration-300 disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-[#F2561B] flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]">
+                                <Link to={"addedPropertise/updateProperty"}>Update </Link>
+                                </button>
+                        </div>
+                    </Card>)
+                }
             </div>
-
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
         </div>
     );
 };

@@ -48,11 +48,14 @@ const AddProperties = () => {
         })
 
         console.log(res.data);
+        console.log(res.data?.data?.display_url );
+        const image = res.data?.data?.display_url
         if (res.data.success) {
             const propertyInfo = {
                 agentName: users?.name,
                 agentEmail: users?.email,
                 agentImage: users?.image,
+                image:image,
                 title: data?.propertyTitle,
                 description: data?.description,
                 location: data?.location,
@@ -65,7 +68,7 @@ const AddProperties = () => {
             const res = await axiosSecure.post('/properties', propertyInfo)
             console.log(res.data);
             if (res.data?.insertedId) {
-                navigate('/addedProperties')
+                navigate('/dashboard/addedProperties')
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
