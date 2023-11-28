@@ -16,7 +16,6 @@ const ManageUsers = () => {
 
     })
 
-    // console.log(isLoading, "heyyeyee");
 
     // delete users
     const handleDeleteUser = email => {

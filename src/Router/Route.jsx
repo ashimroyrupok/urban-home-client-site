@@ -23,6 +23,7 @@ import PropertiesDetails from "../Pages/PropertiesDetails/PropertiesDetails";
 import BuyNow from "../Layout/Dashboard/Dashboard/Wishlist/BuyNow";
 import PropertyBrought from "../Layout/Dashboard/Dashboard/PropertyBrought/PropertyBrought";
 import MyReview from "../Pages/Home/Review/MyReview";
+import PayNow from "../Layout/Dashboard/Dashboard/PropertyBrought/PayNow/PayNow";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
             {
                 path: "myReviews",
                 element: <MyReview></MyReview>
+            },
+            {
+                path:"payNow/:id",
+                element: <PayNow></PayNow>
             },
             // admin
             {

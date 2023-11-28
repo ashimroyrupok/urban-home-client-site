@@ -70,6 +70,7 @@ const PropertiesDetails = () => {
         e.preventDefault()
         const reviewData = {
             reviewerName: user?.displayName,
+            reviewerEmail: user?.email,
             reviewProperty: property?.title,
             agentName:property?.agentName,
             reviewerImage: user?.photoURL,

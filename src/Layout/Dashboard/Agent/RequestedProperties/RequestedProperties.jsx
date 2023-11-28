@@ -15,18 +15,25 @@ const RequestedProperties = () => {
         }
     })
 
-    const handleAcceptRequest = async (id) => {
-        const res = await axiosSecure.patch(`/soldList/${id}`, { status: 'accepted' })
-        console.log(res.data);
-        if (res.data.modifiedCount > 0) {
-            refetch();
-            toast.success("Request Accepted");
+    const handleAcceptRequest = async (item) => {
+        const response = await axiosSecure.patch(`/soldList/reject/${item?.propertyTitle}`)
+        console.log(response.data);
+        if (response.data.modifiedCount > 0) {
+            const res = await axiosSecure.patch(`/soldList/${item?._id}`, { status: 'accepted' })
+            console.log(res.data);
+
+            if (response.data.modifiedCount > 0) {
+                refetch();
+                toast.success("Request Accepted");
+            }
+
+
         }
     }
 
     const handleRejecttRequest = async (id) => {
         console.log(id);
-        const res = await axiosSecure.patch(`/soldList/${id}`, { status:'rejected' })
+        const res = await axiosSecure.patch(`/soldList/${id}`, { status: 'rejected' })
         console.log(res.data);
         if (res.data.modifiedCount > 0) {
             refetch()
@@ -89,7 +96,7 @@ const RequestedProperties = () => {
                                             item?.status === 'accepted' || item?.status === "rejected" ? <div>
                                                 {item?.status === 'accepted' ? <span className="text-green-600">Accepted</span> : <span className="text-red-600"> Rejected</span>}
                                             </div> : <div className="flex  justify-center items-center gap-2" >
-                                                <button onClick={() => handleAcceptRequest(item?._id)} className="btn btn-sm text-white btn-success"> Accept </button>
+                                                <button onClick={() => handleAcceptRequest(item)} className="btn btn-sm text-white btn-success"> Accept </button>
                                                 <button onClick={() => handleRejecttRequest(item?._id)} className="btn btn-sm text-white btn-error"> Reject </button>
                                             </div>
                                         }
