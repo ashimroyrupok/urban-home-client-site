@@ -134,8 +134,8 @@ function Navbar(props) {
                                                 onClose={handleClose}
                                                 TransitionComponent={Fade}
                                             >
-                                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                <MenuItem onClick={handleClose}>My account</MenuItem>
+                                                <MenuItem onClick={handleClose}> {user?.displayName} </MenuItem>
+                                                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                                                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
                                             </Menu>
 

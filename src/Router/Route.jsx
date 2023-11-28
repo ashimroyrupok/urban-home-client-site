@@ -21,6 +21,8 @@ import UpdateProperty from "../Layout/Dashboard/Agent/UpdateProperty/UpdatePrope
 import PrivateRoute from "./PrivateRoute";
 import PropertiesDetails from "../Pages/PropertiesDetails/PropertiesDetails";
 import BuyNow from "../Layout/Dashboard/Dashboard/Wishlist/BuyNow";
+import PropertyBrought from "../Layout/Dashboard/Dashboard/PropertyBrought/PropertyBrought";
+import MyReview from "../Pages/Home/Review/MyReview";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -32,8 +34,8 @@ const router = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path:"/allProperties",
-                element:<AllProperties></AllProperties>
+                path: "/allProperties",
+                element: <AllProperties></AllProperties>
             },
             {
                 path: "/properties-Details/:id",
@@ -41,35 +43,44 @@ const router = createBrowserRouter([
 
             },
             {
-                path:"/buyNow/:id",
+                path: "/buyNow/:id",
                 element: <BuyNow></BuyNow>
             }
         ]
     },
     {
         path: "dashboard",
-        element:<Dashboard></Dashboard>,
+        element: <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
         errorElement: <ErrorPage></ErrorPage>,
-        children:[
+        children: [
             {
-                path:'profile',
-                element:<MyProfile></MyProfile>
+                path: 'profile',
+                element: <MyProfile></MyProfile>
             },
             {
                 path: "wishlist",
                 element: <Wishlist></Wishlist>
             },
+            {
+                path: "propertyBought",
+                element: <PropertyBrought></PropertyBrought>
+
+            },
+            {
+                path: "myReviews",
+                element: <MyReview></MyReview>
+            },
             // admin
             {
                 path: "manageProperties",
-                element:<ManagePropertise></ManagePropertise>
+                element: <ManagePropertise></ManagePropertise>
             },
             {
-                path:"manageUsers",
+                path: "manageUsers",
                 element: <ManageUsers></ManageUsers>
             },
             {
-                path:"manageReviews",
+                path: "manageReviews",
                 element: <ManageReview></ManageReview>
             },
             // agent 
@@ -79,7 +90,7 @@ const router = createBrowserRouter([
             },
 
             {
-                path:"addedProperties/updateProperty/:id",
+                path: "addedProperties/updateProperty/:id",
                 element: <UpdateProperty></UpdateProperty>
             },
             {
@@ -87,7 +98,7 @@ const router = createBrowserRouter([
                 element: <AgentSoldProperties></AgentSoldProperties>
             },
             {
-                path : "requestedProperties",
+                path: "requestedProperties",
                 element: <RequestedProperties></RequestedProperties>
             },
             {
@@ -97,11 +108,11 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path:"/login",
+        path: "/login",
         element: <LoginPage></LoginPage>
     },
     {
-        path:"/signUp",
+        path: "/signUp",
         element: <SignUp></SignUp>
     }
 ]);

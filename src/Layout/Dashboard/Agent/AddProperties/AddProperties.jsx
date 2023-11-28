@@ -5,7 +5,6 @@ import { TextField } from "@mui/material";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +21,7 @@ const AddProperties = () => {
 
     const navigate = useNavigate()
     // console.log(axiosSecure);
-    const { data: users = {}, refetch } = useQuery({
+    const { data: users = {} } = useQuery({
         queryKey: ["users", user?.email],
         queryFn: async () => {
             const res = await axiosPublic.get(`/users/${user?.email}`)

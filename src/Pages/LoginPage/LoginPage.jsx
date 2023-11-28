@@ -7,18 +7,15 @@ import animate from "../../../public/Animation.json"
 import useAuth from "../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-// import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 
 const LoginPage = () => {
 
-    const { signin, googleSignin, user } = useAuth()
+    const { signin, googleSignin } = useAuth()
     const navigate = useNavigate()
 
     const axiosPublic = useAxiosPublic()
-
-    // const axiosPublic = useAxiosPublic()
 
     const {
         register,
@@ -32,7 +29,13 @@ const LoginPage = () => {
             .then(res => {
                 console.log(res);
                 navigate('/')
-                toast.success('login successful')
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             })
             .catch(err => {
                 console.log(err.message);
@@ -49,7 +52,7 @@ const LoginPage = () => {
                 if (res.user?.email) {
                     const info = {
                         email: res.user?.email,
-                        name:res.user?.displayName,
+                        name: res.user?.displayName,
                         password: "google-login",
                         image: res.user?.photoURL
                     }
@@ -121,9 +124,8 @@ const LoginPage = () => {
                     </div>
                 </form>
 
-                <Toaster />
             </div>
-
+            <Toaster></Toaster>
         </div>
     );
 };

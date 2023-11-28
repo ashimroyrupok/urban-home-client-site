@@ -8,6 +8,9 @@ import { GrUserManager } from "react-icons/gr";
 import { FaUsersGear } from "react-icons/fa6";
 import React from "react";
 import { IoMenu } from "react-icons/io5";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../../../Hooks/useAuth";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 const Dashboard = () => {
 
@@ -15,6 +18,18 @@ const Dashboard = () => {
         top: false,
 
     });
+    const { user } = useAuth()
+    const axiosPublic = useAxiosPublic();
+
+    const { data: users = [] } = useQuery({
+        queryKey: [user?.email],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/users/${user?.email}`)
+            return res.data
+        }
+    })
+
+    console.log(users);
 
 
     const toggleDrawer = (anchor, open) => (event) => {
@@ -100,22 +115,61 @@ const Dashboard = () => {
 
                     <div className="bg-orange-400 hidden lg:block w-32 pt-10 lg:w-64 text-white min-h-screen  font-semibold">
                         <div className="ml-3 lg:mx-10 mt-10">
+
+                            {users.role ?
+                                <div>
+
+                                    {
+                                        users.role === 'admin' &&
+                                        <div id="activeList" className="gap-y-2" >
+                                            <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start  items-center">  <FaHome className="text-black text-xl"></FaHome> Admin Profile </NavLink>
+                                            <NavLink to='/dashboard/manageProperties' className="navItem flex gap-1 justify-start  items-center">  <GrUserManager className="text-black text-xl"></GrUserManager> Manage Properties</NavLink>
+                                            <NavLink to='/dashboard/manageUsers' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="text-black text-xl"></FaUsersGear> Manage Users</NavLink>
+                                            <NavLink to='/dashboard/manageReviews' className=" navItem flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Manage reviews</NavLink>
+                                        </div>
+                                    }
+                                    {
+                                        users?.role === "agent" &&
+                                        <div id="activeList" className="gap-y-4 text-sm" >
+                                            <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start   items-center">  <FaHome className="text-black text-xl"></FaHome> Agent Profile </NavLink>
+
+                                            <NavLink to='/dashboard/addProperties' className="navItem flex gap-1 justify-start   items-center"> <IoMdAdd className="text-black text-xl"></IoMdAdd> Add Properties </NavLink>
+
+                                            <NavLink to='/dashboard/addedProperties' className="navItem my-3 flex gap-1 justify-start  items-center">  <GrUserManager className="text-black text-xl"></GrUserManager> My Added Properties</NavLink>
+
+                                            <NavLink to='/dashboard/soldProperties' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="text-black text-xl"></FaUsersGear> My Sold Properties</NavLink>
+
+                                            <NavLink to='/dashboard/requestedProperties' className=" navItem my-3 flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Requested Properties</NavLink>
+                                        </div>
+
+                                    }
+
+                                </div> :
+                                // 
+                                < div id="activeList">
+                                    <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start  items-center">  <FaHome></FaHome> My Profile </NavLink>
+                                    <NavLink to='/dashboard/wishlist' className="navItem flex gap-1 justify-start  items-center">  <FaHeart></FaHeart> Wishlist</NavLink>
+                                    <NavLink to='/dashboard/propertyBought' className="navItem flex gap-1 justify-start  items-center">  <MdOutlineSell></MdOutlineSell> Property bought</NavLink>
+                                    <NavLink to='/dashboard/myReviews' className=" navItem flex gap-1 justify-start  items-center">  <MdPreview></MdPreview> My Reviews</NavLink>
+                                </div>}
+
                             {/* user navbar */}
-                            <div id="activeList">
+                            {/* <div id="activeList">
                                 <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start  items-center">  <FaHome></FaHome> My Profile </NavLink>
                                 <NavLink to='/dashboard/wishlist' className="navItem flex gap-1 justify-start  items-center">  <FaHeart></FaHeart> Wishlist</NavLink>
                                 <NavLink to='/dashboard/propertyBought' className="navItem flex gap-1 justify-start  items-center">  <MdOutlineSell></MdOutlineSell> Property bought</NavLink>
                                 <NavLink to='/dashboard/myReviews' className=" navItem flex gap-1 justify-start  items-center">  <MdPreview></MdPreview> My Reviews</NavLink>
-                            </div>
+                            </div> */}
                             {/* admin navbar */}
-                            <div id="activeList" className="gap-y-2" >
+                            {/* <div id="activeList" className="gap-y-2" >
                                 <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start  items-center">  <FaHome className="text-black text-xl"></FaHome> Admin Profile </NavLink>
                                 <NavLink to='/dashboard/manageProperties' className="navItem flex gap-1 justify-start  items-center">  <GrUserManager className="text-black text-xl"></GrUserManager> Manage Properties</NavLink>
                                 <NavLink to='/dashboard/manageUsers' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="text-black text-xl"></FaUsersGear> Manage Users</NavLink>
                                 <NavLink to='/dashboard/manageReviews' className=" navItem flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Manage reviews</NavLink>
-                            </div>
+                            </div> */}
+
                             {/* agent navbar */}
-                            <div id="activeList" className="gap-y-4 text-sm" >
+                            {/* <div id="activeList" className="gap-y-4 text-sm" >
                                 <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start   items-center">  <FaHome className="text-black text-xl"></FaHome> Agent Profile </NavLink>
 
                                 <NavLink to='/dashboard/addProperties' className="navItem flex gap-1 justify-start   items-center"> <IoMdAdd className="text-black text-xl"></IoMdAdd> Add Properties </NavLink>
@@ -125,9 +179,9 @@ const Dashboard = () => {
                                 <NavLink to='/dashboard/soldProperties' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="text-black text-xl"></FaUsersGear> My Sold Properties</NavLink>
 
                                 <NavLink to='/dashboard/requestedProperties' className=" navItem my-3 flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Requested Properties</NavLink>
-                            </div>
+                            </div> */}
 
-                            <Divider sx={{ my: 6 }} variant="middle" />
+                            <Divider sx={{ my: 6, py: "2px" }} variant="middle" />
                             <div>
                                 <NavLink to={'/'}> <button className="hover:text-[black]"> Go to Home</button></NavLink>
                             </div>
@@ -142,7 +196,7 @@ const Dashboard = () => {
 
             </div>
 
-        </div>
+        </div >
     );
 };
 

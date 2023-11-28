@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
 import useAuth from "../../../../Hooks/useAuth";
+import toast, { Toaster } from "react-hot-toast";
 
 const BuyNow = () => {
     const { id } = useParams()
@@ -27,11 +28,37 @@ const BuyNow = () => {
 
     const onSubmit = async (data) => {
         console.log(data);
+        const info ={
+            agentEmail: property.agentEmail,
+            agentName:data.agentName,
+            buyerEmail:data.buyerEmail,
+            buyerName:data.buyerName,
+            buyingDate: data.buyingDate,
+            location: data.location,
+            offeredPrice: data.offeredPrice,
+            propertyTitle: data.propertyTitle,
+            image: property.image
+        }
+        const res = await axiosPublic.post('/sold', info)
+        console.log(res.data);
+        if (res.data.insertedId) {
 
+            toast.success(`${data?.propertyTitle} buy successful`, {
+                style: {
+                    border: '1px solid #713200',
+                    padding: '16px',
+                    color: '#713200',
+                },
+                iconTheme: {
+                    primary: '#713200',
+                    secondary: '#FFFAEE',
+                },
+            });
+        }
     }
 
 
-    console.log(property);
+    // console.log(property);
     return (
         <div className="mt-20 max-w-6xl  mx-auto">
 
@@ -44,7 +71,7 @@ const BuyNow = () => {
                         <TextField
                             focused
                             id="outlined-required"
-                            value={`${user?.displayName}`}
+                            value={user?.displayName}
                             label="Your Name"
                             name="buyerName"
                             type="text"
@@ -61,7 +88,7 @@ const BuyNow = () => {
                         <TextField
                             focused
                             id="outlined-required"
-                            value={`${user?.email}`}
+                            value={user?.email}
                             label="Your Email"
                             name="buyerEmail"
                             type="text"
@@ -98,16 +125,16 @@ const BuyNow = () => {
                             <TextField
                                 focused
                                 id="outlined-required"
-                                label="agentEmail"
-                                name="Agent Email"
-                                value={property?.agentEmail}
+                                label="agent Name"
+                                name="agentName"
+                                value={property?.agentName}
                                 type="email"
                                 InputProps={{
                                     readOnly: true,
                                 }}
                                 placeholder="Agent Email"
                                 sx={{ width: '90%', borderRadius: '10px' }}
-                                {...register("propertyImage", { required: true })}
+                                {...register("agentName", { required: true })}
                             />
                             {/* {errors.propertyImage && <h5 className="text-red-600"> This field is required </h5>} */}
                         </div>
@@ -122,12 +149,10 @@ const BuyNow = () => {
                                     focused
                                     id="outlined-required"
                                     label={`Offer Price ($ ${property?.minimumPrice}-$ ${property?.maximumPrice}) `}
-                                    // min={property?.minimumPrice}
-                                    // max={property?.maximumPrice}
                                     name="offeredPrice"
                                     type="number"
                                     placeholder="Your Offered Price"
-                                    sx={{  borderRadius: '10px' }}
+                                    sx={{ borderRadius: '10px' }}
                                     {...register("offeredPrice", { required: true, min: `${property?.minimumPrice}`, max: `${property?.maximumPrice}` })}
                                 />
                                 {errors.offeredPrice && <h5 className="text-red-600"> Your offer will be in range </h5>}
@@ -140,7 +165,7 @@ const BuyNow = () => {
                                     name="buyingDate"
                                     type="date"
                                     placeholder="Buying date"
-                                    sx={{  borderRadius: '10px' }}
+                                    sx={{ borderRadius: '10px' }}
                                     {...register("buyingDate", { required: true })}
                                 />
                                 {errors.buyingDate && <h5 className="text-red-600"> This field is required </h5>}
@@ -172,6 +197,10 @@ const BuyNow = () => {
                 </div>
             </form>
 
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
 
 
         </div>

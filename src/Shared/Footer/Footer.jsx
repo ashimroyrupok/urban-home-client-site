@@ -1,46 +1,8 @@
 
 const Footer = () => {
     return (
-        // <footer classNameName="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between">
-        //     <p classNameName="block font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased">
-        //         © 2023 Material Tailwind
-        //     </p>
-        //     <ul classNameName="flex flex-wrap items-center gap-y-2 gap-x-8">
-        //         <li>
-        //             <a
-        //                 href="#"
-        //                 classNameName="block font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
-        //             >
-        //                 About Us
-        //             </a>
-        //         </li>
-        //         <li>
-        //             <a
-        //                 href="#"
-        //                 classNameName="block font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
-        //             >
-        //                 License
-        //             </a>
-        //         </li>
-        //         <li>
-        //             <a
-        //                 href="#"
-        //                 classNameName="block font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
-        //             >
-        //                 Contribute
-        //             </a>
-        //         </li>
-        //         <li>
-        //             <a
-        //                 href="#"
-        //                 classNameName="block font-sans text-base font-normal leading-relaxed text-blue-gray-900 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
-        //             >
-        //                 Contact Us
-        //             </a>
-        //         </li>
-        //     </ul>
-        // </footer>
-        <footer className="footer text-white footer-center p-10 bg-[#333333] text-base-content rounded">
+
+        <footer className="footer text-white footer-center p-10 bg-[#333333]  rounded">
             <nav className=" max-w-4xl mx-auto grid grid-flow-col gap-4">
                 <a className="hover:text-[#F2561B]">About us</a>
                 <a className="hover:text-[#F2561B]">Contact</a>
@@ -55,7 +17,7 @@ const Footer = () => {
                 </div>
             </nav>
             <aside>
-                <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+                <p>Copyright © 2023 - All right reserved by Urban <span className="text-orange-600">Home</span> Ltd</p>
             </aside>
         </footer>
     );

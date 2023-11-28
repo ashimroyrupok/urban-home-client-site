@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
-import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from "@mui/material";
+import { Avatar, Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide } from "@mui/material";
 import { CiLocationOn } from "react-icons/ci";
 import { GiSelfLove } from "react-icons/gi";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -38,13 +38,14 @@ const PropertiesDetails = () => {
 
     // get review
     const { data: reviews = [], refetch } = useQuery({
-        queryKey: ["reviews"],
+        queryKey: ["reviews" , property?.title],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/reviews/property/${id}`)
+            const res = await axiosPublic.get(`/reviews/property/${property?.title}`)
             return res.data
-
         }
     })
+
+    console.log(reviews);
 
     // for modal
 
@@ -69,7 +70,8 @@ const PropertiesDetails = () => {
         e.preventDefault()
         const reviewData = {
             reviewerName: user?.displayName,
-            reviewProperty: id,
+            reviewProperty: property?.title,
+            agentName:property?.agentName,
             reviewerImage: user?.photoURL,
             review: modalValue,
             date: new Date()

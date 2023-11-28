@@ -19,8 +19,8 @@ const AllProperties = () => {
     return (
         <div className="mt-20">
 
-            <div>
-                <SectionTitle title={"Featured"}></SectionTitle>
+            <div className="mt-32">
+                <SectionTitle title={"All Property is Here"}></SectionTitle>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl pr-4 mx-auto lg:grid-cols-4">
                 {
@@ -29,7 +29,7 @@ const AllProperties = () => {
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image="https://i.ibb.co/LhjNsh3/images-q-tbn-ANd9-Gc-Swu-IN5i3-GKx-Iid-XKBye89y-Gp-MY2-Nslx-Mzw-Q-usqp-CAU.jpg"
+                                image={item?.image}
                                 alt="green iguana"
                             />
                             <CardContent>

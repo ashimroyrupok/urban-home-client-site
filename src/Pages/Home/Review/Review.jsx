@@ -30,16 +30,16 @@ const Review = () => {
             >
 
                 {
-                    reviews?.map((review, idx) => <SwiperSlide key={idx}>
+                    reviews?.slice(4).map((review, idx) => <SwiperSlide key={idx}>
                         <div className='flex flex-col max-w-3xl mx-auto justify-center items-center gap-2'>
-                            <p className='text-center'> {review?.description} </p>
+                            <p className='text-center'> {review?.review} </p>
                             <Avatar
                                 alt="Remy Sharp"
-                                src={review?.image}
+                                src={review?.reviewerImage}
                                 sx={{ width: 80, height: 80, mt: "30px" }}
                             />
-                            <p className='text-sm'> {review?.title} </p>
-                            <p className='font-semibold '>{review?.name}</p>
+                            <p className='text-sm'> {review?.propertyTitle} </p>
+                            <p className='font-semibold '>{review?.reviewerName}</p>
                         </div>
                     </SwiperSlide>)
                 }
