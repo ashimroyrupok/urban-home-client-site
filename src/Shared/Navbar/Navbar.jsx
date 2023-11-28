@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Avatar, Container, Fade,  Menu, MenuItem } from '@mui/material';
+import { Avatar, Container, Fade, Menu, MenuItem } from '@mui/material';
 import { Link, NavLink } from 'react-router-dom';
 import "./Navbar.css"
 import useAuth from '../../Hooks/useAuth';
@@ -35,7 +35,9 @@ function Navbar(props) {
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Typography variant="h6" sx={{ my: 2 }}>
-                MUI
+                <div className='w-full bg-slate-200 flex  justify-center items-center'>
+                    <img className='w-[60px]  ' src="https://i.ibb.co/sqkXmDp/urban-homes-removebg-preview.png" alt="" />
+                </div>
             </Typography>
             <Divider />
             <List>
@@ -92,16 +94,19 @@ function Navbar(props) {
                             >
                                 <MenuIcon sx={{ color: "#F2561B" }} />
                             </IconButton>
-                            <Typography
-                                variant="h6"
-                                component="div"
-                                sx={{ flexGrow: 1,fontWeight:800, display: { xs: 'none', sm: 'block' } }}
-                            >
-                                Urban <span className='text-[#F2561B]'>Home</span>
-                            </Typography>
-                            <Box sx={{ display: { xs: 'none', sm: 'block' }  }}>
+                            <div className='flex justify-center flex-row-reverse items-center gap-2'>
+                                <Typography
+                                    variant="h6"
+                                    component="div"
+                                    sx={{ flexGrow: 1, fontWeight: 800, display: { xs: 'none', sm: 'block' } }}
+                                >
+                                    Urban <span className='text-[#F2561B]'>Home</span>
+                                </Typography>
+                                <img className='w-24 hidden lg:block ' src="https://i.ibb.co/sqkXmDp/urban-homes-removebg-preview.png" alt="" />
+                            </div>
+                            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
 
-                                <div id='home' className='flex gap-4 mr-[80px] lg:mr-[300px]'>
+                                <div id='home' className='flex gap-4 mr-[80px] lg:mx-[200px]'>
                                     <NavLink to='/' className='navItem' > Home </NavLink>
                                     <NavLink to='/allProperties' className='navItem'> All Properties </NavLink>
                                     <NavLink to='/dashboard/profile' className='navItem'> Dashboard </NavLink>

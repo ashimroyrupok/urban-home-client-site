@@ -20,6 +20,7 @@ import AddProperties from "../Layout/Dashboard/Agent/AddProperties/AddProperties
 import UpdateProperty from "../Layout/Dashboard/Agent/UpdateProperty/UpdateProperty";
 import PrivateRoute from "./PrivateRoute";
 import PropertiesDetails from "../Pages/PropertiesDetails/PropertiesDetails";
+import BuyNow from "../Layout/Dashboard/Dashboard/Wishlist/BuyNow";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
                 path: "/properties-Details/:id",
                 element: <PrivateRoute> <PropertiesDetails></PropertiesDetails> </PrivateRoute>
 
+            },
+            {
+                path:"/buyNow/:id",
+                element: <BuyNow></BuyNow>
             }
         ]
     },

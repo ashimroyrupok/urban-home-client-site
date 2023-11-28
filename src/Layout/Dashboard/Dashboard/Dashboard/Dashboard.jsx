@@ -3,7 +3,7 @@ import { MdManageSearch, MdOutlineSell, MdPreview } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
 import { NavLink, Outlet } from "react-router-dom";
 import "./Dashboard.css"
-import { Button, Divider, SwipeableDrawer } from "@mui/material";
+import { Button, Divider, SwipeableDrawer, Typography } from "@mui/material";
 import { GrUserManager } from "react-icons/gr";
 import { FaUsersGear } from "react-icons/fa6";
 import React from "react";
@@ -50,6 +50,13 @@ const Dashboard = () => {
                                     {/* {list(anchor)} */}
 
                                     <div className="pl-2 pt-6 lg:mx-10 bg-orange-400 ">
+
+                                        <Typography variant="h6" sx={{ my: 2 }}>
+                                            <div className='w-full bg-slate-100 flex  justify-center items-center'>
+                                                <img className='w-24  ' src="https://i.ibb.co/sqkXmDp/urban-homes-removebg-preview.png" alt="" />
+                                            </div>
+                                        </Typography>
+                                        <Divider />
                                         {/* user navbar */}
                                         <div id="activeList">
                                             <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start  items-center">  <FaHome></FaHome> My Profile </NavLink>
@@ -90,7 +97,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* for small device */}
-                    
+
                     <div className="bg-orange-400 hidden lg:block w-32 pt-10 lg:w-64 text-white min-h-screen  font-semibold">
                         <div className="ml-3 lg:mx-10 mt-10">
                             {/* user navbar */}

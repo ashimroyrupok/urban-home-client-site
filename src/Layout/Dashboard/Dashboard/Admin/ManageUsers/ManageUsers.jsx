@@ -88,7 +88,7 @@ const ManageUsers = () => {
 
             <SectionTitle title={"Manage User"}></SectionTitle>
 
-            <div className="overflow-x-auto   h-[60vh] my-10 max-w-5xl mx-auto text-white ">
+            <div className="overflow-x-auto   h-[60vh] my-10 max-w-2xl lg:max-w-5xl mx-auto text-white ">
 
                 <table className="table overflow-x-auto  text-black">
                     {/* head */}

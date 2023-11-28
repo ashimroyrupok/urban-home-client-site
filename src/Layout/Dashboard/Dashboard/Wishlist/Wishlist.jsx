@@ -5,14 +5,16 @@ import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Wishlist = () => {
 
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
 
-    const { data: wishlists = [] } = useQuery({
-        queryKey: ['wishlists',user?.email],
+    const { data: wishlists = [], refetch } = useQuery({
+        queryKey: ['wishlists', user?.email],
         queryFn: async () => {
             const res = await axiosPublic.get(`/wishlists/${user?.email}`)
             return res.data
@@ -20,7 +22,38 @@ const Wishlist = () => {
 
     })
 
-    console.log(wishlists);
+    // console.log(wishlists);
+    // handle remove wishlists
+    const handleRemove = async (data) => {
+        console.log(data);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosPublic.delete(`/wishlists/${data?._id}`)
+                console.log(res);
+                if (res.data.deletedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your Wish has been deleted.",
+                        icon: "success"
+                    });
+
+                }
+
+            }
+        });
+
+
+    }
 
     return (
         <div className="mt-16">
@@ -72,10 +105,10 @@ const Wishlist = () => {
                             </CardContent>
                         </CardActionArea>
                         <div className="flex justify-between  items-center gap-3 w-full ">
-                            <button className="btn  w-[35%] text-white btn-error">
-                                Delete
+                            <button onClick={() => handleRemove(wish)} className="btn  w-[35%] text-white btn-error">
+                                Remove
                             </button>
-                            <button className="btn   mr-1 duration-300  flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]">Make an Offer <FaArrowRight /></button>
+                            <button className="btn   mr-1 duration-300  flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]"> <Link to={`/buyNow/${wish?._id}`}>Make an Offer</Link> <FaArrowRight /></button>
                         </div>
                     </Card>)}
                 </div>
