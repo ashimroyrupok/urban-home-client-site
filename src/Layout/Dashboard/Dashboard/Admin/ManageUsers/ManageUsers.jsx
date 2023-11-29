@@ -16,6 +16,8 @@ const ManageUsers = () => {
 
     })
 
+    
+
 
     // delete users
     const handleDeleteUser = email => {
@@ -36,11 +38,11 @@ const ManageUsers = () => {
                         refetch()
                         toast.success(`${email} deleted successful`)
                     })
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
+                // Swal.fire({
+                //     title: "Deleted!",
+                //     text: "Your file has been deleted.",
+                //     icon: "success"
+                // });
             }
         });
 
@@ -75,7 +77,13 @@ const ManageUsers = () => {
             .then(res => {
                 console.log(res.data);
                 refetch()
-                toast.error(`${email} make fraud successful`)
+                axiosSecure.patch(`/properties/fraud/${email}`)
+                .then(res => {
+                    console.log(res.data);
+                    refetch()
+                    toast.success(`${email} make fraud successful`)
+                })
+                // toast.error(`${email} make fraud successful`)
 
             })
     }

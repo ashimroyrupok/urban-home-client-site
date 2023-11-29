@@ -27,6 +27,7 @@ const BuyNow = () => {
 
     const onSubmit = async (data) => {
         console.log(data);
+        console.log("hello");
         const info = {
             agentEmail: property.agentEmail,
             agentName: data.agentName,
@@ -38,6 +39,7 @@ const BuyNow = () => {
             propertyTitle: data.propertyTitle,
             image: property.image
         }
+        console.log(info,"info");
         const res = await axiosPublic.post('/sold', info)
         console.log(res.data);
         if (res.data.insertedId) {
@@ -72,9 +74,9 @@ const BuyNow = () => {
                             <div className="label">
                                 <span className="label-text">Your Name</span>
                             </div>
-                            <input value={user?.displayName} name="buyerName" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
+                            <input  value={user?.displayName} name="buyerName" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
 
-                                {...register("buyerName", { required: true })}
+                                {...register("buyerName")}
                             />
 
                         </label>
@@ -88,9 +90,9 @@ const BuyNow = () => {
                             <div className="label">
                                 <span className="label-text">Your Email</span>
                             </div>
-                            <input value={user?.email} name="buyerEmail" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
+                            <input  value={user?.email} name="buyerEmail" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
 
-                                {...register("buyerEmail", { required: true })}
+                                {...register("buyerEmail")}
                             />
 
                         </label>
@@ -104,9 +106,9 @@ const BuyNow = () => {
                             <div className="label">
                                 <span className="label-text">Property Title</span>
                             </div>
-                            <input value={property?.title} name="propertyTitle" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
+                            <input  defaultValue={property?.title} name="propertyTitle" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
 
-                                {...register("propertyTitle", { required: true })}
+                                {...register("propertyTitle" , { required: true })}
                             />
 
                         </label>
@@ -120,7 +122,7 @@ const BuyNow = () => {
                                 <div className="label">
                                     <span className="label-text">Agent Name</span>
                                 </div>
-                                <input value={property?.agentName} name="agentName" readOnly type="email" placeholder="Type here" className="input input-bordered w-[90%] "
+                                <input  defaultValue={property?.agentName} name="agentName" readOnly type="email" placeholder="Type here" className="input input-bordered w-[90%] "
 
                                     {...register("agentName", { required: true })}
                                 />
@@ -170,7 +172,7 @@ const BuyNow = () => {
                             <div className="label">
                                 <span className="label-text"> Property Location </span>
                             </div>
-                            <input disabled value={property?.location} readOnly name="location" type="text" placeholder="Buying date" className="input input-bordered w-[90%] "
+                            <input  defaultValue={property?.location} readOnly name="location" type="text" placeholder="Buying date" className="input input-bordered w-[90%] "
                                {...register("location", { required: true })}
                             />
                             

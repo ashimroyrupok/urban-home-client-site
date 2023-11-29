@@ -6,6 +6,7 @@ import useAuth from "../../../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
 
 const AgentAddedProperties = () => {
     const axiosSecure = useAxiosSecure();
@@ -55,6 +56,8 @@ const AgentAddedProperties = () => {
     console.log(properties);
     return (
         <div>
+
+            <SectionTitle title={"My added Property"}></SectionTitle>
 
             <div className="grid grid-cols-1 pr-3 md:grid-cols-2 max-w-7xl gap-5 my-12 mx-auto lg:grid-cols-4">
                 {

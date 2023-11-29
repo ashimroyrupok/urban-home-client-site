@@ -10,7 +10,7 @@ const RequestedProperties = () => {
     const { data: soldList = [], refetch } = useQuery({
         queryKey: ["soldList", user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get('/soldList')
+            const res = await axiosSecure.get(`/soldList/${user?.email}`)
             return res.data
         }
     })
@@ -45,7 +45,7 @@ const RequestedProperties = () => {
     return (
         <div>
 
-            <div className="overflow-x-auto   h-[60vh] my-10 max-w-5xl mx-auto ">
+            <div className="overflow-x-auto   h-[80vh] my-10 max-w-5xl mx-auto ">
 
                 <SectionTitle title="Manage Properties"></SectionTitle>
 

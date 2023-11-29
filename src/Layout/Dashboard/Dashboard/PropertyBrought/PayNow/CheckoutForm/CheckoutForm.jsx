@@ -7,6 +7,7 @@ import useAuth from "../../../../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const CheckoutForm = ({ id }) => {
+    console.log(id,"id");
 
     const [error, setError] = useState('')
     const [clientSecret, setClientSecret] = useState('')
@@ -21,10 +22,11 @@ const CheckoutForm = ({ id }) => {
     const { data: soldItem = {} } = useQuery({
         queryKey: ['soldItem', id],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/soldList/${id}`)
+            const res = await axiosPublic.get(`/soldList/pay/${id}`)
             return res.data
         }
     })
+    console.log(soldItem);
 
     console.log(soldItem?.offeredPrice);
 

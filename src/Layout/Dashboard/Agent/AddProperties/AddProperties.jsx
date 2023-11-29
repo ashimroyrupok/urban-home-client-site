@@ -38,44 +38,55 @@ const AddProperties = () => {
     const onSubmit = async (data) => {
         console.log(data);
 
-        const imageFile = { image: data.propertyImage[0] }
-        // console.log(imageFile);
-        const res = await axiosPublic.post(hosting_api, imageFile, {
-            headers: {
-                'content-type': "multipart/form-data"
-            }
-        })
+        try {
+            const imageFile = { image: data.propertyImage[0] }
+            // console.log(imageFile);
+            const res = await axiosPublic.post(hosting_api, imageFile, {
+                headers: {
+                    'content-type': "multipart/form-data"
+                }
+            })
 
-        console.log(res.data);
-        console.log(res.data?.data?.display_url );
-        const image = res.data?.data?.display_url
-        if (res.data.success) {
-            const propertyInfo = {
-                agentName: users?.name,
-                agentEmail: users?.email,
-                agentImage: users?.image,
-                image:image,
-                title: data?.propertyTitle,
-                description: data?.description,
-                location: data?.location,
-                maximumPrice: data?.maximumPrice,
-                minimumPrice: data?.minimumPrice
-            }
-
-            console.log(propertyInfo);
-
-            const res = await axiosSecure.post('/properties', propertyInfo)
             console.log(res.data);
-            if (res.data?.insertedId) {
-                navigate('/dashboard/addedProperties')
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: `${data?.propertyTitle} added successful`,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+            console.log(res.data?.data?.display_url);
+            const image = res.data?.data?.display_url
+            if (res.data.success) {
+                const propertyInfo = {
+                    agentName: users?.name,
+                    agentEmail: users?.email,
+                    agentImage: users?.image,
+                    image: image,
+                    title: data?.propertyTitle,
+                    description: data?.description,
+                    location: data?.location,
+                    maximumPrice: data?.maximumPrice,
+                    minimumPrice: data?.minimumPrice
+                }
+
+                console.log(propertyInfo);
+
+                const res = await axiosSecure.post('/properties', propertyInfo)
+                console.log(res.data);
+                if (res.data?.insertedId) {
+                    navigate('/dashboard/addedProperties')
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${data?.propertyTitle} added successful`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
             }
+        }
+        catch {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Please try with another picture",
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
 
 

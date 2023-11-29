@@ -6,6 +6,7 @@ import Lottie from "lottie-react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAuth from "../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 
 const api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
@@ -42,7 +43,7 @@ const SignUp = () => {
             const dataInfo = {
                 email: data.email,
                 password: data.password,
-                name:data.name,
+                name: data.name,
                 image: res.data.data.display_url
             }
 
@@ -58,7 +59,13 @@ const SignUp = () => {
                         update(data.name, res.data.data.display_url)
                             .then(res => {
                                 console.log(res);
-                                toast.success('Create user Successful!')
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "Login successful",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
                                 navigate('/')
                             })
                             .catch(err => {
