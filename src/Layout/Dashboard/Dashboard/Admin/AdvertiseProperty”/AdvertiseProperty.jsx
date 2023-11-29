@@ -1,4 +1,4 @@
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import SectionTitle from "../../../../../Shared/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
@@ -12,23 +12,45 @@ const AdvertiseProperty = () => {
     const { data: allVerified = [], refetch } = useQuery({
         queryKey: ['allVerified'],
         queryFn: async () => {
-            const { data } = await axiosPublic.get('/properties/verified');
+            const { data } = await axiosSecure.get('/properties/verified');
             return data;
         }
     })
 
+
+
+    const { data: advertisement = [],refetch:loading } = useQuery({
+        queryKey: ['advertisement'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/properties/advertisement');
+            // console.log(data);
+            return res.data;
+        }
+    })
+
+    console.log(advertisement);
+
+
+    // make advertise ,
+
     const handleAdvertise = async (item) => {
-        const res = await axiosSecure.patch(`/propertise/advertise/${item?._id}`, { advertised: true })
-        console.log(res.data);
-        if (res.data.modifiedCount > 0) {
-            refetch()
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Advertised make successful",
-                showConfirmButton: false,
-                timer: 1500
-            });
+        if (advertisement.length < 6) {
+            const res = await axiosSecure.patch(`/propertise/advertise/${item?._id}`, { advertised: true })
+            console.log(res.data);
+            if (res.data.modifiedCount > 0) {
+                refetch()
+                loading()
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Advertised make successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+        else {
+            toast.error("Your advertise limit finished")
         }
     }
 
@@ -37,6 +59,7 @@ const AdvertiseProperty = () => {
         console.log(res.data);
         if (res.data.modifiedCount > 0) {
             refetch()
+            loading()
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -52,7 +75,7 @@ const AdvertiseProperty = () => {
 
 
 
-            <div className="overflow-x-auto   h-[60vh] my-10 w-96 lg:w-[1020px]  mx-auto   ">
+            <div className="overflow-x-auto   h-[80vh] my-10 w-96 lg:w-[1020px]  mx-auto   ">
 
                 <SectionTitle title={"Manage Advertise"}></SectionTitle>
 
@@ -115,7 +138,10 @@ const AdvertiseProperty = () => {
 
 
 
-                <Toaster></Toaster>
+                <Toaster
+                    position="top-right"
+                    reverseOrder={false}
+                />
             </div>
 
         </div>

@@ -62,7 +62,7 @@ const Featured = () => {
                             </CardContent>
                         </CardActionArea>
                         <div className="flex justify-between items-center  w-full ">
-                            <p>status</p>
+                            <p className="btn btn-success text-white"> {item?.status} </p>
                             <button className="py-2 px-4 mr-3 mb-3 flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]"><Link to={`/properties-Details/${item?._id}`}>Details</Link> <FaArrowRight /></button>
                         </div>
                     </Card>)
