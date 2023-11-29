@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../../Hooks/useAxiosSecure";
-import { Spa } from "@mui/icons-material";
 
 const ManagePropertise = () => {
 
@@ -40,7 +39,7 @@ const ManagePropertise = () => {
 
             <div className="overflow-x-auto overflow-y-auto w-96 lg:w-[1020px]  dark:bg-black dark:text-white   h-[80vh] my-10 max-w-5xl mx-auto text-white ">
 
-        
+
 
                 <table className="table text-black">
                     {/* head */}
@@ -82,14 +81,29 @@ const ManagePropertise = () => {
                                                         <div>
 
                                                             {
-                                                                item?.status === "verified" ? <span className="text-green-600"> verified</span>: <span className="text-red-600">Rejected</span>
+                                                                item?.status === "verified" ? <span className="text-green-600"> verified</span> : <span className="text-red-600">Rejected</span>
                                                             }
 
                                                         </div>
                                                         :
                                                         <div className="flex justify-center items-center gap-1">
-                                                            <button onClick={() => handleVerify(item)} className="btn btn-sm btn-primary">Verify</button>
-                                                            <button onClick={() => handleRejected(item)} className="btn btn-sm btn-error text-white">Reject</button>
+
+                                                            {
+                                                                item?.status === "bought" || item?.status === "fraud"
+                                                                    ?
+                                                                    <div>
+                                                                        {item?.status === "bought" ?
+                                                                            <span className="text-success"> {item?.status} </span>
+                                                                            :
+                                                                            <span className="text-error"> {item?.status} </span>}
+                                                                    </div>
+                                                                    :
+                                                                    <div className="flex justify-center items-center gap-1">
+                                                                        <button onClick={() => handleVerify(item)} className="btn btn-sm btn-primary">Verify</button>
+                                                                        <button onClick={() => handleRejected(item)} className="btn btn-sm btn-error text-white">Reject</button>
+                                                                    </div>
+                                                            }
+
 
                                                         </div>
                                                 }

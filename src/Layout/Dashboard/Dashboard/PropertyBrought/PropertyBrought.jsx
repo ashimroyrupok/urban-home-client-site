@@ -29,7 +29,7 @@ const PropertyBrought = () => {
             <SectionTitle title={"Your Bought Property"}></SectionTitle>
 
             <div >
-                <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl gap-5 my-12 mx-auto lg:grid-cols-4">
+                <div className="grid grid-cols-1 pr-2 md:grid-cols-2 max-w-7xl gap-5 my-12 mx-auto lg:grid-cols-4">
                     {boughtProperties?.map(property => <Card key={property?._id} sx={{ maxWidth: "380px", mx: "auto", position: "relative" }}>
                         <CardActionArea>
                             <CardMedia

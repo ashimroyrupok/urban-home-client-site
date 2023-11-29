@@ -77,7 +77,7 @@ const ManageUsers = () => {
             .then(res => {
                 console.log(res.data);
                 refetch()
-                axiosSecure.patch(`/properties/fraud/${email}`)
+                axiosSecure.patch(`/properties/fraud/${email}` ,{status: "fraud"})
                 .then(res => {
                     console.log(res.data);
                     refetch()
