@@ -9,13 +9,13 @@ const Review = () => {
     const { data: reviews = [] } = useQuery({
         queryKey: ["reviews"],
         queryFn: async () => {
-            const res = await axiosPublic.get('http://localhost:5000/reviews')
+            const res = await axiosPublic.get('/latestReview')
             return res.data
 
         }
     })
 
-    console.log(reviews);
+    // console.log(reviews);
     return (
         <div className='my-10 '>
             <SectionTitle title={"WHAT OUR CLIENTS ARE SAYING"}></SectionTitle>
@@ -30,7 +30,7 @@ const Review = () => {
             >
 
                 {
-                    reviews?.slice(0,3).map((review, idx) => <SwiperSlide key={idx}>
+                    reviews?.map((review, idx) => <SwiperSlide key={idx}>
                         <div className='flex flex-col max-w-3xl mx-auto justify-center items-center gap-2'>
                             <p className='text-center'> {review?.review} </p>
                             <Avatar

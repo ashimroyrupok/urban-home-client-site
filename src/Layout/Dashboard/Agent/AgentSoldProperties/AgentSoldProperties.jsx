@@ -1,7 +1,26 @@
 import { Toaster } from "react-hot-toast";
 import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
+import useAuth from "../../../../Hooks/useAuth";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const AgentSoldProperties = () => {
+
+    const {user} = useAuth()
+    const axiosSecure = useAxiosSecure()
+
+    const {data :soldProperties=[]} = useQuery({
+        queryKey: ["soldProperties", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/sold/agent/${user?.email}`)
+            return res.data
+        }
+    })
+
+    console.log(soldProperties);
+
+    // })
+
     return (
         <div>
 
@@ -21,48 +40,34 @@ const AgentSoldProperties = () => {
                         </tr>
                     </thead>
 
-                    {/* {
-        users?.map(item => <tbody key={item._id}>
+                    {
+        soldProperties?.map(item => <tbody key={item._id}>
             <tr className=" ">
                 <td>
 
-                    {item?.name}
+                    {item?.propertyTitle}
                 </td>
                 <td>
-                    {item?.email}
+                    {item?.location}
+
+                </td>
+                <td>
+                  {item?.buyerName}
 
                 </td>
                 <td>
                     {
-                        item?.role === "fraud" ? <p className="text-red-500">Fraud</p> :
-                            <div>
-                                {item?.role == "admin" ? <p className="text-green-600">admin</p> : <button onClick={() => handleAdmin(item?.email)} className="btn btn-outline text-green-600">
-                                    Make Admin
-                                </button>}
-                            </div>
+                        item?.buyerEmail
                     }
 
                 </td>
                 <td>
-                    {
-                        item?.role === "fraud" ? <p className="text-red-600">Fraud</p> :
-                            <div>
-                                {item?.role === "agent" ? <p className="text-green-600">agent</p> : <button onClick={() => handleAgent(item?.email)} className="btn btn-outline text-green-600">
-                                    Make Agent
-                                </button>}
-                            </div>
-                    }
-
-                </td>
-                <td>
-                    {item?.role === "fraud" ? <p className="text-red-600">Fraud</p>
-                        :
-                        <button onClick={() => handleFraud(item?.email)} className="btn btn-outline text-red-600">Fraud</button>}
+                    {item?.offeredPrice}
                 </td>
 
             </tr>
         </tbody>)
-    } */}
+    }
 
                 </table>
 

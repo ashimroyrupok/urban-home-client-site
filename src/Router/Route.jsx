@@ -24,6 +24,7 @@ import BuyNow from "../Layout/Dashboard/Dashboard/Wishlist/BuyNow";
 import PropertyBrought from "../Layout/Dashboard/Dashboard/PropertyBrought/PropertyBrought";
 import MyReview from "../Pages/Home/Review/MyReview";
 import PayNow from "../Layout/Dashboard/Dashboard/PropertyBrought/PayNow/PayNow";
+import AdvertiseProperty from "../Layout/Dashboard/Dashboard/Admin/AdvertiseProperty”/AdvertiseProperty";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/allProperties",
-                element: <AllProperties></AllProperties>
+                element: <PrivateRoute> <AllProperties></AllProperties> </PrivateRoute>
             },
             {
                 path: "/properties-Details/:id",
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"payNow/:id",
-                element: <PayNow></PayNow>
+                element: <PrivateRoute> <PayNow></PayNow> </PrivateRoute>
             },
             // admin
             {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
             {
                 path: "manageReviews",
                 element: <ManageReview></ManageReview>
+            },
+            {
+                path:"advertiseProperty",
+                element: <AdvertiseProperty></AdvertiseProperty>
             },
             // agent 
             {

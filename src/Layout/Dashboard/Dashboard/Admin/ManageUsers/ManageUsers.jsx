@@ -103,7 +103,7 @@ const ManageUsers = () => {
                     </thead>
 
                     {
-                        users?.map(item => <tbody key={item._id}>
+                       users.length && users?.map(item => <tbody key={item._id}>
                             <tr className=" ">
                                 <td>
 
@@ -138,7 +138,11 @@ const ManageUsers = () => {
                                 <td>
                                     {item?.role === "fraud" ? <p className="text-red-600">Fraud</p>
                                         :
-                                        <button onClick={() => handleFraud(item?.email)} className="btn btn-outline text-red-600">Fraud</button>}
+                                        <div>
+                                            {item?.role === "agent" ? <button onClick={() => handleFraud(item?.email)} className="btn btn-outline text-red-600">Fraud</button> :
+                                                <button  disabled className="btn  btn-outline text-red-600">Fraud</button>
+                                            }
+                                        </div>}
                                 </td>
                                 <td>
                                     <button onClick={() => handleDeleteUser(item?.email)} className="btn btn-error"> X </button>

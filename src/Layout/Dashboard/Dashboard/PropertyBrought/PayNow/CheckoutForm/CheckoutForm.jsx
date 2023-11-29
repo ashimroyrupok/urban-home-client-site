@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../../../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../../../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const CheckoutForm = ({ id }) => {
 
@@ -30,13 +31,27 @@ const CheckoutForm = ({ id }) => {
 
     useEffect(() => {
 
-        axiosSecure.post('/create-payment-intent', { price: parseInt(soldItem?.offeredPrice) })
-            .then(res => {
-                console.log(res.data?.clientSecret);
-                setClientSecret(res.data?.clientSecret)
-            })
+        // const intent = async () => {
+        //     const result = await axiosSecure.post('/create-payment-intent', { price: parseInt(soldItem?.offeredPrice) })
+        //     console.log(result.data?.clientSecret);
+        //     setClientSecret(result.data?.clientSecret)
+        //     return result.data
+        // }
+        // intent()
 
-    }, [soldItem?.offeredPrice, axiosSecure])
+        if (soldItem?.offeredPrice > 0) {
+
+            axiosSecure.post('/create-payment-intent', { price: parseInt(soldItem?.offeredPrice) })
+                .then(res => {
+                    console.log(res.data?.clientSecret);
+                    setClientSecret(res.data?.clientSecret)
+                })
+
+        }
+
+
+
+    }, [soldItem?.offeredPrice])
 
     const handleSubmit = async (event) => {
         // Block native form submission.
@@ -79,8 +94,32 @@ const CheckoutForm = ({ id }) => {
         }
         else {
             console.log("payment intent", paymentIntent);
-            if(paymentIntent.status === "succeeded"){
+            if (paymentIntent.status === "succeeded") {
                 setTransactionId(paymentIntent.id)
+                console.log(paymentIntent.id);
+                console.log(transactionId, "transectin");
+                const info = {
+                    status: "bought",
+                    transactionId: paymentIntent.id
+                }
+                console.log(info);
+                const res = await axiosSecure.patch(`/soldList/payment/${id}`, info)
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    //
+
+                    const response = await axiosSecure.patch(`/properties/bought/${soldItem?.propertyTitle}`, { status: "bought" })
+                    console.log(res.data);
+                    if (response.data.modifiedCount > 0) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Payment successful",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                }
             }
         }
 
@@ -111,6 +150,7 @@ const CheckoutForm = ({ id }) => {
                 </button>
 
                 <p className="text-red-600"> {error} </p>
+                {transactionId && <p className="text-green-600"> {transactionId} </p>}
             </form>
 
         </div>

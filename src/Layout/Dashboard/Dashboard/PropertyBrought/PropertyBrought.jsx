@@ -1,4 +1,4 @@
-import {  Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
@@ -59,8 +59,13 @@ const PropertyBrought = () => {
                                 </Typography>
                                 <div className=" absolute top-[2%] left-0">
                                     {property?.status ? <div>
-                                        {property?.status === "accepted" ? <button className="btn btn-sm btn-success text-white"> Accepted</button> : <button className="btn btn-sm btn-error text-white">
-                                            Rejected</button>}
+                                        {property?.status === "accepted" ? <button className="btn btn-sm btn-success text-white"> Accepted</button> : <div>
+                                            {
+                                                property?.status === "bought" ?  <button className="btn btn-sm btn-accent text-white">
+                                                Bought</button> :<button className="btn btn-sm btn-error text-white">
+                                                Rejected</button>
+                                             }
+                                             </div>}
                                     </div> : <button className="btn btn-sm btn-primary">pending</button>}
 
                                 </div>
@@ -70,8 +75,12 @@ const PropertyBrought = () => {
                         <div className="flex justify-center mx-auto  items-center gap-3 w-full ">
 
                             {
-                                property?.status === "accepted" ? <button className="btn    mr-1 duration-300 text-center  flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]"> <Link to={`/dashboard/payNow/${property?._id}`}>Pay</Link> <FaArrowRight /></button> :
-                                    <button disabled className="btn   mr-1 duration-300 text-center  flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]"> <Link >Pay</Link> <FaArrowRight /></button>
+                                property?.status ? <div>
+                                    {
+                                        property?.status === "accepted" ? <button className="btn    mr-1 duration-300 text-center  flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]"> <Link to={`/dashboard/payNow/${property?._id}`}>Pay</Link> <FaArrowRight /></button> : <span className="text-green-600 p-1 btn"> {property?.transactionId} </span>
+                                    }
+                                </div> :
+                                    <button disabled className="btn   mr-1 duration-300 text-center  flex gap-1 hover:bg-[#F2561B] hover:text-white justify-end border  text-[#F2561B] border-[#F2561B]"> Pay <FaArrowRight /></button>
                             }
                         </div>
                     </Card>)}
