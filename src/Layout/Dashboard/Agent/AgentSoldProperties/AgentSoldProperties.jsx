@@ -6,10 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 
 const AgentSoldProperties = () => {
 
-    const {user} = useAuth()
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
 
-    const {data :soldProperties=[]} = useQuery({
+    const { data: soldProperties = [] } = useQuery({
         queryKey: ["soldProperties", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/sold/agent/${user?.email}`)
@@ -24,11 +24,13 @@ const AgentSoldProperties = () => {
     return (
         <div>
 
-            <div className="overflow-x-auto   h-[60vh] my-10 max-w-5xl mx-auto ">
+            <SectionTitle title="Manage Properties"></SectionTitle>
 
-                <SectionTitle title="Manage Properties"></SectionTitle>
+            <div className="overflow-x-auto    h-[60vh] my-10 w-96 lg:w-[1020px] lg:max-w-5xl mx-auto ">
 
-                <table className="table overflow-x-auto  text-black">
+
+
+                <table className="table  text-black">
                     {/* head */}
                     <thead>
                         <tr>
@@ -41,33 +43,33 @@ const AgentSoldProperties = () => {
                     </thead>
 
                     {
-        soldProperties?.map(item => <tbody key={item._id}>
-            <tr className=" ">
-                <td>
+                        soldProperties?.map(item => <tbody key={item._id}>
+                            <tr className=" ">
+                                <td>
 
-                    {item?.propertyTitle}
-                </td>
-                <td>
-                    {item?.location}
+                                    {item?.propertyTitle}
+                                </td>
+                                <td>
+                                    {item?.location}
 
-                </td>
-                <td>
-                  {item?.buyerName}
+                                </td>
+                                <td>
+                                    {item?.buyerName}
 
-                </td>
-                <td>
-                    {
-                        item?.buyerEmail
+                                </td>
+                                <td>
+                                    {
+                                        item?.buyerEmail
+                                    }
+
+                                </td>
+                                <td>
+                                    {item?.offeredPrice}
+                                </td>
+
+                            </tr>
+                        </tbody>)
                     }
-
-                </td>
-                <td>
-                    {item?.offeredPrice}
-                </td>
-
-            </tr>
-        </tbody>)
-    }
 
                 </table>
 

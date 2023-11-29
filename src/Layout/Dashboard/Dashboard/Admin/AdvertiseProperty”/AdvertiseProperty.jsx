@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 const AdvertiseProperty = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure()
-    const { data: allVerified = [] ,refetch} = useQuery({
+    const { data: allVerified = [], refetch } = useQuery({
         queryKey: ['allVerified'],
         queryFn: async () => {
             const { data } = await axiosPublic.get('/properties/verified');
@@ -18,9 +18,9 @@ const AdvertiseProperty = () => {
     })
 
     const handleAdvertise = async (item) => {
-        const res = await axiosSecure.patch(`/propertise/advertise/${item?._id}`, {advertised:true})
+        const res = await axiosSecure.patch(`/propertise/advertise/${item?._id}`, { advertised: true })
         console.log(res.data);
-        if(res.data.modifiedCount > 0){
+        if (res.data.modifiedCount > 0) {
             refetch()
             Swal.fire({
                 position: "top-end",
@@ -28,14 +28,14 @@ const AdvertiseProperty = () => {
                 title: "Advertised make successful",
                 showConfirmButton: false,
                 timer: 1500
-              });
+            });
         }
     }
 
-    const handleRemoveAdvertise =async(item) => {
-        const res = await axiosSecure.patch(`/propertise/advertise/${item?._id}`, {advertised:false})
+    const handleRemoveAdvertise = async (item) => {
+        const res = await axiosSecure.patch(`/propertise/advertise/${item?._id}`, { advertised: false })
         console.log(res.data);
-        if(res.data.modifiedCount > 0){
+        if (res.data.modifiedCount > 0) {
             refetch()
             Swal.fire({
                 position: "top-end",
@@ -43,16 +43,18 @@ const AdvertiseProperty = () => {
                 title: "Advertised remove successful",
                 showConfirmButton: false,
                 timer: 1500
-              });
+            });
         }
     }
     // console.log(allVerified);
     return (
         <div>
 
-            <SectionTitle title={"Manage Advertise"}></SectionTitle>
 
-            <div className="overflow-x-auto   h-[60vh] my-10 max-w-2xl lg:max-w-5xl mx-auto text-white ">
+
+            <div className="overflow-x-auto   h-[60vh] my-10 w-96 lg:w-[1020px]  mx-auto   ">
+
+                <SectionTitle title={"Manage Advertise"}></SectionTitle>
 
                 <table className="table overflow-x-auto  text-black">
                     {/* head */}
@@ -97,7 +99,7 @@ const AdvertiseProperty = () => {
 
                                 </td>
                                 <td>
-                                    {item?.advertised === true ? <button onClick={()=> handleRemoveAdvertise(item)} className="btn btn-sm text-red-600 btn-outline ">Remove Advertise</button>
+                                    {item?.advertised === true ? <button onClick={() => handleRemoveAdvertise(item)} className="btn btn-sm text-red-600 btn-outline ">Remove Advertise</button>
                                         :
                                         <button onClick={() => handleAdvertise(item)} className="btn  btn-outline btn-sm text-green-600"> Advertise </button>
 

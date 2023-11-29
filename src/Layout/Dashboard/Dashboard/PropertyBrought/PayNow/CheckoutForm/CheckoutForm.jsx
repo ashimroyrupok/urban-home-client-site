@@ -31,13 +31,7 @@ const CheckoutForm = ({ id }) => {
 
     useEffect(() => {
 
-        // const intent = async () => {
-        //     const result = await axiosSecure.post('/create-payment-intent', { price: parseInt(soldItem?.offeredPrice) })
-        //     console.log(result.data?.clientSecret);
-        //     setClientSecret(result.data?.clientSecret)
-        //     return result.data
-        // }
-        // intent()
+
 
         if (soldItem?.offeredPrice > 0) {
 

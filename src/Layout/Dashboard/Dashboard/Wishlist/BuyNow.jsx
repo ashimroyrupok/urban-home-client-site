@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { TextField } from "@mui/material";
 import SectionTitle from "../../../../Shared/SectionTitle/SectionTitle";
 import useAuth from "../../../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
@@ -28,11 +27,11 @@ const BuyNow = () => {
 
     const onSubmit = async (data) => {
         console.log(data);
-        const info ={
+        const info = {
             agentEmail: property.agentEmail,
-            agentName:data.agentName,
-            buyerEmail:data.buyerEmail,
-            buyerName:data.buyerName,
+            agentName: data.agentName,
+            buyerEmail: data.buyerEmail,
+            buyerName: data.buyerName,
             buyingDate: data.buyingDate,
             location: data.location,
             offeredPrice: data.offeredPrice,
@@ -68,75 +67,68 @@ const BuyNow = () => {
             <form onSubmit={handleSubmit(onSubmit)} >
                 <div className="flex justify-around gap-y-3  items-center ">
                     <div className="form-control w-full ">
-                        <TextField
-                            focused
-                            id="outlined-required"
-                            value={user?.displayName}
-                            label="Your Name"
-                            name="buyerName"
-                            type="text"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            sx={{ width: '90%', borderRadius: '10px' }}
-                            {...register("buyerName", { required: true })}
-                        />
-                        {/* {errors.buyerName && <h5 className="text-red-600"> This field is required </h5>} */}
+
+                        <label className="form-control w-full ">
+                            <div className="label">
+                                <span className="label-text">Your Name</span>
+                            </div>
+                            <input value={user?.displayName} name="buyerName" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
+
+                                {...register("buyerName", { required: true })}
+                            />
+
+                        </label>
+
+
 
                     </div>
                     <div className="form-control w-full ">
-                        <TextField
-                            focused
-                            id="outlined-required"
-                            value={user?.email}
-                            label="Your Email"
-                            name="buyerEmail"
-                            type="text"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            placeholder="your buyerEmail"
-                            sx={{ width: '90%', borderRadius: '10px' }}
-                            {...register("buyerEmail", { required: true })}
-                        />
-                        {/* {errors.agentEmail && <h5 className="text-red-600"> This field is required </h5>} */}
+
+                        <label className="form-control w-full ">
+                            <div className="label">
+                                <span className="label-text">Your Email</span>
+                            </div>
+                            <input value={user?.email} name="buyerEmail" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
+
+                                {...register("buyerEmail", { required: true })}
+                            />
+
+                        </label>
+
+
                     </div>
                 </div>
                 <div className="flex  my-4 items-center justify-center">
                     <div className="w-full">
-                        <TextField
-                            focused
-                            id="outlined-required"
-                            label="Property Title"
-                            name="propertyTitle"
-                            value={property?.title}
-                            type="text"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                            placeholder=" property Title"
-                            sx={{ width: '90%', my: 3, borderRadius: '10px' }}
-                            {...register("propertyTitle", { required: true })}
-                        />
-                        {/* {errors.propertyTitle && <h5 className="text-red-600"> This field is required </h5>} */}
+                        <label className="form-control w-full ">
+                            <div className="label">
+                                <span className="label-text">Property Title</span>
+                            </div>
+                            <input value={property?.title} name="propertyTitle" readOnly type="text" placeholder="Type here" className="input input-bordered w-[90%] "
+
+                                {...register("propertyTitle", { required: true })}
+                            />
+
+                        </label>
+
+
                     </div>
                     <div className="w-full">
                         <div className="form-control w-full ">
-                            <TextField
-                                focused
-                                id="outlined-required"
-                                label="agent Name"
-                                name="agentName"
-                                value={property?.agentName}
-                                type="email"
-                                InputProps={{
-                                    readOnly: true,
-                                }}
-                                placeholder="Agent Email"
-                                sx={{ width: '90%', borderRadius: '10px' }}
-                                {...register("agentName", { required: true })}
-                            />
-                            {/* {errors.propertyImage && <h5 className="text-red-600"> This field is required </h5>} */}
+
+                            <label className="form-control w-full ">
+                                <div className="label">
+                                    <span className="label-text">Agent Name</span>
+                                </div>
+                                <input value={property?.agentName} name="agentName" readOnly type="email" placeholder="Type here" className="input input-bordered w-[90%] "
+
+                                    {...register("agentName", { required: true })}
+                                />
+
+                            </label>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -145,54 +137,50 @@ const BuyNow = () => {
                         <div className="flex justify-start gap-6 items-center">
 
                             <div className="w-full">
-                                <TextField
-                                    focused
-                                    id="outlined-required"
-                                    label={`Offer Price ($ ${property?.minimumPrice}-$ ${property?.maximumPrice}) `}
-                                    name="offeredPrice"
-                                    type="number"
-                                    placeholder="Your Offered Price"
-                                    sx={{ borderRadius: '10px' }}
-                                    {...register("offeredPrice", { required: true, min: `${property?.minimumPrice}`, max: `${property?.maximumPrice}` })}
-                                />
-                                {errors.offeredPrice && <h5 className="text-red-600"> Your offer will be in range </h5>}
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text"> {`Offer Price ($ ${property?.minimumPrice}-$ ${property?.maximumPrice}) `} </span>
+                                    </div>
+                                    <input  name="offeredPrice" type="number" placeholder="Your Offered Price" className="input input-bordered w-[90%] "
+                                        {...register("offeredPrice", { required: true, min: `${property?.minimumPrice}`, max: `${property?.maximumPrice}` })}
+                                    />
+                                    {errors.offeredPrice && <h5 className="text-red-600"> Your offer will be in range </h5>}
+
+                                </label>
+
                             </div>
                             <div className="w-full">
-                                <TextField
-                                    focused
-                                    id="outlined-required"
-                                    label="Buying Date"
-                                    name="buyingDate"
-                                    type="date"
-                                    placeholder="Buying date"
-                                    sx={{ borderRadius: '10px' }}
-                                    {...register("buyingDate", { required: true })}
-                                />
-                                {errors.buyingDate && <h5 className="text-red-600"> This field is required </h5>}
+
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text"> Buying Date </span>
+                                    </div>
+                                    <input  name="buyingDate" type="date" placeholder="Buying date" className="input input-bordered w-[90%] "
+                                        {...register("buyingDate", { required: true })}
+                                    />
+                                    {errors.buyingDate && <h5 className="text-red-600"> This field is required </h5>}
+                                </label>
+
                             </div>
 
                         </div>
                     </div>
                     <div className="form-control w-full ">
-                        <TextField
-                            focused
-                            id="outlined-required"
-                            label="Property Location"
-                            name="location"
-                            type="text"
-                            value={property?.location}
-                            inputProps={{
-                                readOnly: true
-                            }}
-                            placeholder="your location"
-                            sx={{ width: '90%', borderRadius: '10px' }}
-                            {...register("location", { required: true })}
-                        />
-                        {/* {errors.location && <h5 className="text-red-600"> This field is required </h5>} */}
+                        <label className="form-control w-full ">
+                            <div className="label">
+                                <span className="label-text"> Property Location </span>
+                            </div>
+                            <input disabled value={property?.location} readOnly name="location" type="text" placeholder="Buying date" className="input input-bordered w-[90%] "
+                               {...register("location", { required: true })}
+                            />
+                            
+                        </label>
+
+
                     </div>
                 </div>
 
-                <div className="flex justify-center items-center w-full">
+                <div className="flex justify-center mx-auto items-center w-full">
                     <input className="btn  border-[#F2561B] bg-[#F2561B] text-white hover:bg-[#ef9473] w-full mt-6" type="submit" value="Submit Now" />
                 </div>
             </form>

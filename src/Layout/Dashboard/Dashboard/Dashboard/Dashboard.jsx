@@ -97,7 +97,7 @@ const Dashboard = () => {
 
                                                             <NavLink to='/dashboard/addedProperties' className="navItem my-3 flex gap-1 justify-start  items-center">  <GrUserManager className="text-black text-xl"></GrUserManager> My Added Properties</NavLink>
 
-                                                            <NavLink to='/dashboard/soldProperties' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="text-black text-xl"></FaUsersGear> My Sold Properties</NavLink>
+                                                            <NavLink to='/dashboard/soldProperties' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="  text-xl"></FaUsersGear> My Sold Properties</NavLink>
 
                                                             <NavLink to='/dashboard/requestedProperties' className=" navItem my-3 flex gap-1 justify-start  items-center">  <MdManageSearch className="text-black text-xl"></MdManageSearch> Requested Properties</NavLink>
                                                         </div>
@@ -113,16 +113,16 @@ const Dashboard = () => {
                                                     <NavLink to='/dashboard/myReviews' className=" navItem flex gap-1 justify-start  items-center">  <MdPreview></MdPreview> My Reviews</NavLink>
                                                 </div>}
 
-                                            <Divider sx={{ my: 6, py: "2px" }} variant="middle" />
+                                            {/* <Divider sx={{ my: 6, py: "2px" }} variant="middle" />
                                             <div>
                                                 <NavLink to={'/'}> <button className="hover:text-[black]"> Go to Home</button></NavLink>
-                                            </div>
+                                            </div> */}
                                         </div>
 
 
                                         <Divider sx={{ my: 6 }} variant="middle" />
                                         <div>
-                                            <NavLink to={'/'}> <button className="hover:text-[black]"> Go to Home</button></NavLink>
+                                            <NavLink to={'/'}> <button className="hover:text-[black] pb-14 px-5 text-center "> Go to Home</button></NavLink>
                                         </div>
                                     </div>
 

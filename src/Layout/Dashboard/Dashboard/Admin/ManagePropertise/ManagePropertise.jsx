@@ -38,11 +38,9 @@ const ManagePropertise = () => {
     return (
         <div>
 
-            <div className="overflow-x-auto overflow-y-auto dark:bg-black dark:text-white   h-[60vh] my-10 max-w-5xl mx-auto text-white ">
+            <div className="overflow-x-auto overflow-y-auto w-96 lg:w-[1020px]  dark:bg-black dark:text-white   h-[60vh] my-10 max-w-5xl mx-auto text-white ">
 
-                <div className=" w-full text-black justify-end flex">
-
-                </div>
+        
 
                 <table className="table text-black">
                     {/* head */}

@@ -62,7 +62,7 @@ const Wishlist = () => {
 
             <div >
                 <div className="grid grid-cols-1 md:grid-cols-2 max-w-7xl gap-5 my-12 mx-auto lg:grid-cols-4">
-                    {wishlists?.map(wish => <Card key={wish?._id} sx={{ maxWidth: "380px", mx: "auto", position: "relative" }}>
+                    {wishlists?.map(wish => <Card key={wish?._id} sx={{ maxWidth: "380px", mx: "auto",px:"6px", position: "relative" }}>
                         <CardActionArea>
                             <CardMedia
                                 component="img"
@@ -94,14 +94,7 @@ const Wishlist = () => {
                                     gutterBottom variant="h6" component="div">
                                     For Sale
                                 </Typography>
-                                {/* <Typography
-                                    sx={{
-                                        fontSize: "18px", position: "absolute", px: "3px", py: "1px",
-                                        backgroundColor: "#F2561B", color: "white", top: "2%", left: "0%"
-                                    }}
-                                    gutterBottom variant="h6" component="div">
-                                    
-                                </Typography> */}
+
                             </CardContent>
                         </CardActionArea>
                         <div className="flex justify-between  items-center gap-3 w-full ">
