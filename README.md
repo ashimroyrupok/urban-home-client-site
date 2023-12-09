@@ -1,8 +1,9 @@
-# React + Vite
+live link : https://assignmet-12-4ce4a.firebaseapp.com
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+About JOb Hunter feature
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+User can signin and sign out in this website.
+User can see there wishlist and brought item.
+This is website is real estate.so that user can pay with stripe here. -There have there type role admin,user and agent.
+Only loged user can see details.
+All user can review our property .
