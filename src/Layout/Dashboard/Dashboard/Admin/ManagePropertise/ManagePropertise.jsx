@@ -19,7 +19,7 @@ const ManagePropertise = () => {
         const res = await axiosSecure.patch(`/properties/${data._id}`, { status: "verified" })
         console.log(res.data);
         if (res.data.modifiedCount > 0) {
-            console.log("hello");
+            // console.log("hello");
             refetch()
         }
     }
@@ -28,7 +28,7 @@ const ManagePropertise = () => {
         const res = await axiosSecure.patch(`/properties/${data._id}`, { status: "rejected" })
         console.log(res.data);
         if (res.data.modifiedCount > 0) {
-            console.log("hello");
+            // console.log("hello");
             refetch()
         }
     }

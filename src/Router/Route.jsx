@@ -25,6 +25,7 @@ import PropertyBrought from "../Layout/Dashboard/Dashboard/PropertyBrought/Prope
 import MyReview from "../Pages/Home/Review/MyReview";
 import PayNow from "../Layout/Dashboard/Dashboard/PropertyBrought/PayNow/PayNow";
 import AdvertiseProperty from "../Layout/Dashboard/Dashboard/Admin/AdvertiseProperty”/AdvertiseProperty";
+import Contact from "../Pages/Contact/Contact";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: "/allProperties",
                 element: <PrivateRoute> <AllProperties></AllProperties> </PrivateRoute>
+            },
+            {
+                path: "/contactUs",
+                element: <Contact></Contact>
             },
             {
                 path: "/properties-Details/:id",

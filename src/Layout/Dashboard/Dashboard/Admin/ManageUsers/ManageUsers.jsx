@@ -78,10 +78,20 @@ const ManageUsers = () => {
                 console.log(res.data);
                 refetch()
                 axiosSecure.patch(`/properties/fraud/${email}` ,{status: "fraud"})
-                .then(res => {
-                    console.log(res.data);
+                .then(async(res) => {
+                    console.log(res.data,"fraud");
                     refetch()
-                    toast.success(`${email} make fraud successful`)
+                    axiosSecure
+                      .patch(`/propertise/advertise/fraud/${email}`, {
+                        advertised: false,
+                      })
+                      .then((res) => {
+                        console.log("success full response");
+                        console.log(res.data, "adds");
+                        refetch();
+                        toast.success(`${email} make fraud successful`);
+                      });
+                    
                 })
                 // toast.error(`${email} make fraud successful`)
 

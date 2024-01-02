@@ -44,6 +44,7 @@ function Navbar(props) {
                 <div id='home' className='flex flex-col gap-4'>
                     <NavLink to='/' className='navItem' > Home </NavLink>
                     <NavLink to='/allProperties' className='navItem'> All Properties </NavLink>
+                    <NavLink to='/contactUs' className='navItem'> Contact </NavLink>
                     <NavLink to='/dashboard/profile' className='navItem'> Dashboard </NavLink>
                 </div>
             </List>
@@ -109,6 +110,7 @@ function Navbar(props) {
                                 <div id='home' className='flex gap-4 mr-[80px] lg:mx-[200px]'>
                                     <NavLink to='/' className='navItem' > Home </NavLink>
                                     <NavLink to='/allProperties' className='navItem'> All Properties </NavLink>
+                                    <NavLink to='/contactUs' className='navItem'> Contact </NavLink>
                                     <NavLink to='/dashboard/profile' className='navItem'> Dashboard </NavLink>
                                 </div>
 
