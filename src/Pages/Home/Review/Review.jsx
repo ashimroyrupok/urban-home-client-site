@@ -17,7 +17,7 @@ const Review = () => {
 
     // console.log(reviews);
     return (
-        <div className='my-10 '>
+        <div className='my-10  p-4 '>
             <SectionTitle title={"WHAT OUR CLIENTS ARE SAYING"}></SectionTitle>
 
             <Swiper

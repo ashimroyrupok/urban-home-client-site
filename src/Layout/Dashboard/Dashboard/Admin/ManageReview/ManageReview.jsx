@@ -30,7 +30,7 @@ const ManageReview = () => {
 
     return (
         <div  className="mt-11">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 lg:grid-cols-3">
                 {
                     reviews?.map(review => <div key={review?._id} className="card card-compact w-80 bg-base-100 shadow-xl">
                     <figure><img className="h-[250px] w-full" src={review?.reviewerImage} alt="Shoes" /></figure>

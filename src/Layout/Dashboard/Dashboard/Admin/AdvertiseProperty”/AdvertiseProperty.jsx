@@ -75,9 +75,9 @@ const AdvertiseProperty = () => {
 
 
 
-            <div className="overflow-x-auto   h-[80vh] my-10 w-96 lg:w-[1020px]  mx-auto   ">
-
                 <SectionTitle title={"Manage Advertise"}></SectionTitle>
+            <div className="overflow-x-auto overflow-y-auto mx-auto  h-[80vh] my-10 w-96 lg:w-[1020px]     ">
+
 
                 <table className="table overflow-x-auto  text-black">
                     {/* head */}

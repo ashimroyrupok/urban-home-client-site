@@ -45,11 +45,11 @@ const RequestedProperties = () => {
     return (
         <div>
 
-            <div className="overflow-x-auto   h-[80vh] my-10 max-w-5xl mx-auto ">
+            <div className="   h-[80vh] my-10  lg:w-[1024px] max-w-2xl lg:max-w-5xl mx-auto ">
 
                 <SectionTitle title="Manage Properties"></SectionTitle>
 
-                <table className="table overflow-x-auto overflow-y-auto text-black">
+                <table className="table  mx-auto w-[600px] overflow-x-auto overflow-y-auto text-black">
                     {/* head */}
                     <thead>
                         <tr>

@@ -68,12 +68,12 @@ const Dashboard = () => {
                                     <div className="pl-2 pt-6 lg:mx-10 bg-orange-400 ">
 
                                         <Typography variant="h6" sx={{ my: 2 }}>
-                                            <div className='w-full bg-slate-100 flex  justify-center items-center'>
+                                            <div className='w-full mx-auto bg-slate-100 flex  justify-center items-center'>
                                                 <img className='w-24  ' src="https://i.ibb.co/sqkXmDp/urban-homes-removebg-preview.png" alt="" />
                                             </div>
                                         </Typography>
                                         <Divider />
-                                        <div className="ml-3 mt-3">
+                                        <div className="ml-3 px-3 mt-3">
 
                                             {users.role ?
                                                 <div>
@@ -134,15 +134,15 @@ const Dashboard = () => {
 
                     {/* for small device */}
 
-                    <div className="bg-orange-400 hidden lg:block w-32 pt-10 lg:w-64 text-white min-h-screen  font-semibold">
-                        <div className="ml-3 lg:mx-10 mt-10">
+                    <div className="bg-orange-400 hidden  lg:block w-36 pt-10 lg:w-64 text-white min-h-screen  font-semibold">
+                        <div className=" w-full  lg:mx-10 mt-10">
 
                             {users.role ?
                                 <div>
 
                                     {
                                         users.role === 'admin' &&
-                                        <div id="activeList" className="gap-y-2" >
+                                        <div id="activeList" className="gap-y-2 px-3" >
                                             <NavLink to='/dashboard/profile' className="navItem flex gap-1 justify-start  items-center">  <FaHome className="text-black text-xl"></FaHome> Admin Profile </NavLink>
                                             <NavLink to='/dashboard/manageProperties' className="navItem flex gap-1 justify-start  items-center">  <GrUserManager className="text-black text-xl"></GrUserManager> Manage Properties</NavLink>
                                             <NavLink to='/dashboard/manageUsers' className="navItem flex gap-1 justify-start  items-center">  <FaUsersGear className="text-black text-xl"></FaUsersGear> Manage Users</NavLink>
