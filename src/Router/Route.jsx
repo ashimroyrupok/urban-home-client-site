@@ -8,7 +8,6 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import SignUp from "../Pages/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard/Dashboard/Dashboard/Dashboard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import MyProfile from "../Layout/Dashboard/Dashboard/MyProfile/MyProfile";
 import Wishlist from "../Layout/Dashboard/Dashboard/Wishlist/Wishlist";
 import ManagePropertise from "../Layout/Dashboard/Dashboard/Admin/ManagePropertise/ManagePropertise";
 import ManageUsers from "../Layout/Dashboard/Dashboard/Admin/ManageUsers/ManageUsers";
@@ -34,7 +33,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home></Home>
+                element: <Home/>
             },
             {
                 path: "/allProperties",
@@ -60,10 +59,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute> <Dashboard></Dashboard> </PrivateRoute>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
-            {
-                path: 'profile',
-                element: <MyProfile></MyProfile>
-            },
+            
             {
                 path: "wishlist",
                 element: <Wishlist></Wishlist>

@@ -141,7 +141,7 @@ function Navbar(props) {
                     {" "}
                     Contact{" "}
                   </NavLink>
-                  <NavLink to="/dashboard/profile" className="navItem">
+                  <NavLink to="/dashboard/wishlist" className="navItem">
                     {" "}
                     Dashboard{" "}
                   </NavLink>
