@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
@@ -12,6 +12,7 @@ import {
   DialogContent,
   DialogTitle,
   Slide,
+  Stack,
   Typography,
 } from "@mui/material";
 import { CiLocationOn } from "react-icons/ci";
@@ -23,6 +24,9 @@ import useAuth from "../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import PropertiesDetailsHeader from "./PropertiesDetailsHeader";
 import { MdLocationOn } from "react-icons/md";
+import DetailsImages from "./DetailsImages";
+import Overview from "./Overview";
+import RightSidebar from "./RightSidebar";
 // modal
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -33,7 +37,7 @@ const PropertiesDetails = () => {
   const [modalValue, setValue] = useState("");
   // console.log(modalVale);
   const { user } = useAuth();
-  // console.log(user);
+  console.log(user);
 
   const { id } = useParams();
   // console.log(id);
@@ -186,47 +190,18 @@ const PropertiesDetails = () => {
         maximumPrice={property?.maximumPrice}
       />
 
-      <div className="flex lg:flex-row flex-col gap-4 p-1 my-5">
-        <div className="flex-1">
-          <img
-            width={600}
-            height={450}
-            className=" w-full"
-            alt="room_image"
-            src={property.image ?? ""}
-          />
-        </div>
-        <div className="flex-1">
-          <div className="grid grid-cols-2 gap-3">
-            <img
-              width={300}
-              height={220}
-              className=" w-full"
-              src={property.image ?? ""}
-              alt="img"
-            />
-            <img
-              width={300}
-              height={220}
-              className=" w-full"
-              src={property.image ?? ""}
-              alt="img"
-            />
-            <img
-              width={300}
-              height={220}
-              className=" w-full"
-              src={property.image ?? ""}
-              alt="img"
-            />
-            <img
-              width={300}
-              height={220}
-              className=" w-full"
-              src={property.image ?? ""}
-              alt="img"
-            />
+      <DetailsImages images={property?.image} />
+
+      <div className=" grid grid-cols-1 md:grid-cols-4 gap-4 w-full my-8 mx-auto p-2 ">
+        <div className="md:col-span-3 ">
+          <Overview />
+          <div className="bg-white my-5  p-6 text-[#2a3741]">
+            <h2 className="my-4  text-xl  font-bold  "> Description </h2>
+            <p className=" text-sm "> {property?.description} </p>
           </div>
+        </div>
+        <div className=" md:col-span-1  p-2">
+         <RightSidebar property={property} />
         </div>
       </div>
     </div>
