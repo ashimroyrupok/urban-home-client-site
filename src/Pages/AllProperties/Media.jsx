@@ -100,9 +100,11 @@ Media.propTypes = {
 
 export default function Skeletons() {
   return (
-    <div>
+    <div className="  w-full h-full mx-auto  ">
       <Media loading />
-      <Media />
+      
+
+      {/* <Media /> */}
     </div>
   );
 }

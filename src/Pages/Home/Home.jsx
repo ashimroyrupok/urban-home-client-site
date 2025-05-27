@@ -4,20 +4,21 @@ import SubmitProperty from "../../Components/SubmitProperty/SubmitProperty";
 import Review from "./Review/Review";
 import Areas from "./Areas/Areas";
 import Featured from "./Featured/Featured";
+import Latest from "./Latest/Latest";
 
 const Home = () => {
-    return (
-        <div>
+  return (
+    <div>
+      <Banner />
+      <Featured />
+      <Latest />
+      <SubmitProperty />
+      <Areas />
+      <Review />
 
-            <Banner/>
-            <Featured></Featured>
-            <SubmitProperty></SubmitProperty>
-            <Areas></Areas>
-            <Review></Review>
-            
-            <Toaster />
-        </div>
-    );
+      <Toaster />
+    </div>
+  );
 };
 
 export default Home;

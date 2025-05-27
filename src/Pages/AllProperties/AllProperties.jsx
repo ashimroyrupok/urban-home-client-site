@@ -75,86 +75,99 @@ const AllProperties = () => {
       </div>
 
       {/* Properties Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto items-stretch">
+
+      <div>
         {isLoading ? (
-          <Skeletons />
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto items-stretch">
+            <Skeletons />
+            <Skeletons />
+            <Skeletons />
+            <Skeletons />
+            <Skeletons />
+            <Skeletons />
+            <Skeletons />
+            <Skeletons />
+          </div>
         ) : filteredProperties.length ? (
-          filteredProperties.map((item) => (
-            <Card
-              key={item?._id}
-              sx={{
-                width: "100%",
-                maxWidth: 300,
-                minHeight: 460,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                pl: "10px",
-                mx: "auto",
-                position: "relative",
-              }}
-            >
-              <CardActionArea className="py-2">
-                <CardMedia
-                  component="img"
-                  image={item?.image}
-                  alt="property image"
-                  sx={{
-                    height: 220, // fixed height
-                    objectFit: "cover", // image will cover without distortion
-                  }}
-                />
-
-                <CardContent sx={{ flex: 1 }}>
-                  <Typography variant="h6" className="font-semibold my-1">
-                    {item?.title}
-                  </Typography>
-                  <p className="flex text-sm text-slate-500">
-                    <CiLocationOn className="mr-1" />
-                    {item?.location}
-                  </p>
-
-                  <div className="flex items-center gap-2 my-3">
-                    <Avatar alt={item?.agentName} src={item?.agentImage} />
-                    <Typography variant="body2">{item?.agentName}</Typography>
-                  </div>
-
-                  <p className="text-[#F2561B] font-semibold text-[14px]">
-                    ${item?.minimumPrice} - ${item?.maximumPrice}
-                  </p>
-
-                  <Typography
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto items-stretch">
+            {" "}
+            {filteredProperties.map((item) => (
+              <Card
+                key={item?._id}
+                sx={{
+                  width: "100%",
+                  maxWidth: 300,
+                  minHeight: 460,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  pl: "10px",
+                  mx: "auto",
+                  position: "relative",
+                }}
+              >
+                <CardActionArea className="py-2">
+                  <CardMedia
+                    component="img"
+                    image={item?.image}
+                    alt="property image"
                     sx={{
-                      fontSize: "14px",
-                      position: "absolute",
-                      px: "6px",
-                      py: "2px",
-                      backgroundColor: "#F2561B",
-                      color: "white",
-                      top: "2%",
-                      right: "0%",
-                      borderRadius: "4px",
+                      height: 220, // fixed height
+                      objectFit: "cover", // image will cover without distortion
                     }}
+                  />
+
+                  <CardContent sx={{ flex: 1 }}>
+                    <Typography variant="h6" className="font-semibold my-1">
+                      {item?.title}
+                    </Typography>
+                    <p className="flex text-sm text-slate-500">
+                      <CiLocationOn className="mr-1" />
+                      {item?.location}
+                    </p>
+
+                    <div className="flex items-center gap-2 my-3">
+                      <Avatar alt={item?.agentName} src={item?.agentImage} />
+                      <Typography variant="body2">{item?.agentName}</Typography>
+                    </div>
+
+                    <p className="text-[#F2561B] font-semibold text-[14px]">
+                      ${item?.minimumPrice} - ${item?.maximumPrice}
+                    </p>
+
+                    <Typography
+                      sx={{
+                        fontSize: "14px",
+                        position: "absolute",
+                        px: "6px",
+                        py: "2px",
+                        backgroundColor: "#F2561B",
+                        color: "white",
+                        top: "2%",
+                        right: "0%",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      For Sale
+                    </Typography>
+
+                    <button className="btn btn-success btn-sm text-white absolute top-[2%] left-[2%]">
+                      {item?.status}
+                    </button>
+                  </CardContent>
+                </CardActionArea>
+
+                <div className="flex justify-end items-center mt-auto p-3 border-t">
+                  <Link
+                    to={`/properties-Details/${item?._id}`}
+                    className="py-2 px-4 flex items-center gap-1 border border-[#F2561B] text-[#F2561B] hover:bg-[#F2561B] hover:text-white transition rounded-md"
                   >
-                    For Sale
-                  </Typography>
-
-                  <button className="btn btn-success btn-sm text-white absolute top-[2%] left-[2%]">
-                    {item?.status}
-                  </button>
-                </CardContent>
-              </CardActionArea>
-
-              <div className="flex justify-end items-center mt-auto p-3 border-t">
-                <Link
-                  to={`/properties-Details/${item?._id}`}
-                  className="py-2 px-4 flex items-center gap-1 border border-[#F2561B] text-[#F2561B] hover:bg-[#F2561B] hover:text-white transition rounded-md"
-                >
-                  Details <FaArrowRight />
-                </Link>
-              </div>
-            </Card>
-          ))
+                    Details <FaArrowRight />
+                  </Link>
+                </div>
+              </Card>
+            ))}{" "}
+          </div>
         ) : (
           <p className="text-center col-span-full text-gray-500">
             No properties found.

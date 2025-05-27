@@ -1,3 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import SectionTitle from "../../../Shared/SectionTitle/SectionTitle";
 import {
   Card,
   CardActionArea,
@@ -5,15 +8,12 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import SectionTitle from "../../../Shared/SectionTitle/SectionTitle";
 import { CiLocationOn } from "react-icons/ci";
-import { FaRegStar } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa6";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
+import { FaArrowRight, FaRegStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Skeletons from "../../AllProperties/Media";
-const Featured = () => {
+
+const Latest = () => {
   const axiosPublic = useAxiosPublic();
 
   const { data: advertisement = [], isLoading } = useQuery({
@@ -25,7 +25,7 @@ const Featured = () => {
     },
   });
 
-  console.log(advertisement);
+  //   console.log(advertisement);
 
   return (
     <div className="my-10 container p-4 mx-auto">
@@ -39,6 +39,7 @@ const Featured = () => {
             <Skeletons />
             <Skeletons />
             <Skeletons />
+         
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 gap-y-4 gap-x-4 max-w-7xl mx-auto lg:grid-cols-5 ">
@@ -130,4 +131,4 @@ const Featured = () => {
   );
 };
 
-export default Featured;
+export default Latest;
