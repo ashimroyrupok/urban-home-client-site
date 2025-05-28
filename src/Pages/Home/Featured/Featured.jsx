@@ -30,7 +30,7 @@ const Featured = () => {
   return (
     <div className="my-10 container p-4 mx-auto">
       <div>
-        <SectionTitle title={"Latest Houses"}></SectionTitle>
+        <SectionTitle title={"Featured Houses"}></SectionTitle>
       </div>
       <div>
         {isLoading ? (
