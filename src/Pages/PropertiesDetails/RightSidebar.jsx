@@ -2,13 +2,13 @@
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const RightSidebar = ({ property }) => {
+const RightSidebar = ({ handleWish, property }) => {
   return (
-    <div>
+    <div className=" sticky top-20">
       <div className=" flex justify-center items-center bg-white p-2 gap-4">
         <Avatar
           alt="seller image"
-          src={property?.image}
+          src={property?.agentImage}
           variant="square"
           sx={{ width: 100, height: 100 }}
         >
@@ -25,7 +25,9 @@ const RightSidebar = ({ property }) => {
           </Link>
         </div>
       </div>
-      <div className=" bg-[#E2E5E7] "></div>
+      <div className="  ">
+        <button onClick={handleWish} className=" btn hover:text-black  w-full my-2 bg-sky-500  text-white "> Add to Wishlist </button>
+      </div>
     </div>
   );
 };

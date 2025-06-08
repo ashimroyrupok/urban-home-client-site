@@ -70,10 +70,10 @@ const PropertiesDetailsHeader = ({ location, title,minimumPrice,maximumPrice }) 
             Featured
           </button>
           <button className=" px-3 py-1 text-sm bg-sky-400 font-bold text-white">
-            Featured
+            Apartment
           </button>
           <button className=" px-3 py-1 text-sm bg-sky-400 font-bold text-white">
-            Featured
+            For Sale
           </button>
         </div>
         <div>

@@ -27,6 +27,7 @@ import { MdLocationOn } from "react-icons/md";
 import DetailsImages from "./DetailsImages";
 import Overview from "./Overview";
 import RightSidebar from "./RightSidebar";
+import Reviews from "./Reviews";
 // modal
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -35,7 +36,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const PropertiesDetails = () => {
   const [open, setOpen] = React.useState(false);
   const [modalValue, setValue] = useState("");
-  // console.log(modalVale);
+  const [rating,setRating]=useState(0)
+  console.log(modalValue);
   const { user } = useAuth();
   console.log(user);
 
@@ -89,6 +91,7 @@ const PropertiesDetails = () => {
       agentName: property?.agentName,
       reviewerImage: user?.photoURL,
       review: modalValue,
+      rating:rating,
       date: new Date(),
     };
 
@@ -119,10 +122,16 @@ const PropertiesDetails = () => {
       title: property?.title,
     };
 
-    const res = await axiosPublic.post("/wishlists", dataInfo);
-    console.log(res.data);
-    if (res.data.insertedId) {
-      toast.success("Wishlist added successfully");
+    try {
+      const res = await axiosPublic.post("/wishlists", dataInfo);
+      console.log(res.data);
+      if (res.data.acknowledged) {
+        toast.success("Wishlist added successfully");
+      } else {
+        toast.error("Failed to add ");
+      }
+    } catch (error) {
+      toast.error("Something went wrong")
     }
   };
 
@@ -199,9 +208,17 @@ const PropertiesDetails = () => {
             <h2 className="my-4  text-xl  font-bold  "> Description </h2>
             <p className=" text-sm "> {property?.description} </p>
           </div>
+          {/* review section */}
+          <Reviews
+            reviews={reviews}
+            setValue={setValue}
+            handleReviewSubmit={handleReviewSubmit}
+            rating={rating}
+            setRating={setRating}
+          />
         </div>
         <div className=" md:col-span-1  p-2">
-         <RightSidebar property={property} />
+          <RightSidebar handleWish={handleWish} property={property} />
         </div>
       </div>
     </div>
