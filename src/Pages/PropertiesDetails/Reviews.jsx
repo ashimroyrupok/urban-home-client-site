@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { Avatar, Rating, TextareaAutosize } from "@mui/material";
-import { useState } from "react";
 
 const Reviews = ({
   reviews,
