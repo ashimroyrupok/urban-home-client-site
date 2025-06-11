@@ -203,7 +203,7 @@ const PropertiesDetails = () => {
 
       <div className=" grid grid-cols-1 md:grid-cols-4 gap-4 w-full my-8 mx-auto p-2 ">
         <div className="md:col-span-3 ">
-          <Overview />
+          <Overview property={property} />
           <div className="bg-white my-5  p-6 text-[#2a3741]">
             <h2 className="my-4  text-xl  font-bold  "> Description </h2>
             <p className=" text-sm "> {property?.description} </p>
