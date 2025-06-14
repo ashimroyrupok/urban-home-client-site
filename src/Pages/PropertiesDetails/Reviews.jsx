@@ -23,14 +23,14 @@ const Reviews = ({
             </span>
           </h1>
           <div className=" flex justify-around items-center gap-2">
-            <h1 className="text-none font-semibold"> {averageRating || 5} </h1>
-            <Rating name="read-only" value={averageRating || 5} readOnly />
+            <h1 className="text-none font-semibold"> {averageRating || 0} </h1>
+            <Rating name="read-only" value={averageRating || 0} readOnly />
           </div>
         </div>
       </div>
       {/* all reviews */}
       <div className="my-2 bg-white p-4">
-        {reviews ? (
+        {reviews.length > 0 ? (
           reviews.map((review) => (
             <div key={review?._id} className=" mb-5 border-b-2 pb-4">
               <div className="flex justify-between items-center gap-2 ">
@@ -46,7 +46,7 @@ const Reviews = ({
                 <div className=" ">
                   <Rating
                     name="read-only"
-                    value={review?.rating || 5}
+                    value={review?.rating || 0}
                     readOnly
                   />
                 </div>
@@ -58,7 +58,7 @@ const Reviews = ({
             </div>
           ))
         ) : (
-          <div className=" items-center p-4">
+          <div className="  p-4 text-center">
             <h2 className=""> Currently no review here</h2>
           </div>
         )}

@@ -109,7 +109,10 @@ const AllProperties = () => {
                 <CardActionArea className="py-2">
                   <CardMedia
                     component="img"
-                    image={item?.image}
+                    image={
+                      item?.images?.[0] ??
+                      "https://i.ibb.co/bRzjXVB/real-estate-property.jpg"
+                    }
                     alt="property image"
                     sx={{
                       height: 220, // fixed height

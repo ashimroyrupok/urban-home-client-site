@@ -276,7 +276,7 @@ const AddProperties = () => {
 
         <div className="flex justify-around items-center my-4 ">
           <div className="form-control w-full ">
-            <div className="flex justify-start gap-6 items-center">
+            <div className="flex flex-col lg:flex-row justify-start gap-6 items-center">
               <TextField
                 focused
                 id="outlined-required"
@@ -284,7 +284,13 @@ const AddProperties = () => {
                 name="area"
                 type="number"
                 placeholder=" Your property Area sq2 "
-                sx={{ width: "40%", borderRadius: "10px" }}
+                sx={{
+                  width: {
+                    xs: "90%",
+                    md: "40%",
+                  },
+                  borderRadius: "10px",
+                }}
                 {...register("area", { required: true })}
               />
               {errors.area && (
@@ -298,7 +304,13 @@ const AddProperties = () => {
                 name="builtYear"
                 type="number"
                 placeholder=" Built year"
-                sx={{ width: "40%", borderRadius: "10px" }}
+                sx={{
+                  width: {
+                    xs: "90%",
+                    md: "40%",
+                  },
+                  borderRadius: "10px",
+                }}
                 {...register("builtYear", { required: true })}
               />
               {errors.builtYear && (
@@ -307,7 +319,7 @@ const AddProperties = () => {
             </div>
           </div>
           <div className="form-control w-full ">
-            <div className="flex justify-start gap-6 items-center">
+            <div className="flex  flex-col lg:flex-row justify-start gap-6 items-center">
               <TextField
                 focused
                 id="outlined-required"
@@ -315,7 +327,13 @@ const AddProperties = () => {
                 name="bedRoom"
                 type="number"
                 placeholder=" Enter your total bed room "
-                sx={{ width: "40%", borderRadius: "10px" }}
+                sx={{
+                  width: {
+                    xs: "90%",
+                    md: "40%",
+                  },
+                  borderRadius: "10px",
+                }}
                 {...register("bedRoom", { required: true })}
               />
               {errors.bedRoom && (
@@ -329,7 +347,13 @@ const AddProperties = () => {
                 name="bathRoom"
                 type="number"
                 placeholder=" Built year"
-                sx={{ width: "40%", borderRadius: "10px" }}
+                sx={{
+                  width: {
+                    xs: "90%",
+                    md: "40%",
+                  },
+                  borderRadius: "10px",
+                }}
                 {...register("bathRoom", { required: true })}
               />
               {errors.bathRoom && (

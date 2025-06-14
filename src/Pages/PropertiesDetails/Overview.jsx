@@ -33,9 +33,9 @@ const Overview = ({property}) => {
       <Divider className="my-6" />
       {/* divider */}
       <div className=" flex justify-between my-6 text-sm font-normal items-center gap-2 ">
-        <p className=" text-sm ">Listing ID: 10123</p>
+        <p className=" text-sm ">Listing ID:  {property?._id} </p>
 
-        <p>Added 6 months ago</p>
+        <p> {new Date(property?.date).toLocaleDateString()} </p>
       </div>
     </div>
   );
