@@ -62,7 +62,7 @@ const Featured = () => {
                       height: 170,
                       objectFit: "cover",
                     }}
-                    image={item?.image}
+                    image={item?.images?.[0]}
                     alt="Property Image"
                   />
                   <CardContent>
